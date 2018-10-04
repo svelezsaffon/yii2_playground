@@ -4,11 +4,10 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Plane;
-use app\models\PlaneSearch;
 use app\models\Servicios;
 use app\models\Direccion;
 use app\models\Trabajador;
-use app\models\ServiciosSearch;
+use app\models\PlaneSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -45,7 +44,6 @@ class PlaneController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            
         ]);
     }
 
@@ -71,23 +69,20 @@ class PlaneController extends Controller
     {
         $model = new Plane();
         $model->user=Yii::$app->user->id;   
-        $model->fecha_creacion==date("Y/m/d");
-        if ($model->load(Yii::$app->request->post())) {
-            
-            if($model->save()){
-                
-                return $this->redirect(['view', 'id' => $model->id]);    
-            }            
+        $model->fecha_creacion=date("Y-m-d");
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         $servicioModel = Servicios::find()->all();
         $direccionesModel = Direccion::find()->all();
         $trabajadorModel = Trabajador::find()->all();
-        
 
         return $this->render('create', [
             'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
         ]);
+
     }
 
     /**
@@ -104,6 +99,14 @@ class PlaneController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
+        $servicioModel = Servicios::find()->all();
+        $direccionesModel = Direccion::find()->all();
+        $trabajadorModel = Trabajador::find()->all();
+
+        return $this->render('create', [
+            'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
+        ]);
 
         return $this->render('update', [
             'model' => $model,

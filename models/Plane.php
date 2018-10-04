@@ -23,10 +23,10 @@ use Yii;
  * @property int $domingo
  * @property int $direccion
  *
- * @property Trabajador $trabajador0
  * @property Servicios $servicio0
  * @property User $user0
  * @property Direccion $direccion0
+ * @property Trabajador $trabajador0
  */
 class Plane extends \yii\db\ActiveRecord
 {
@@ -48,10 +48,10 @@ class Plane extends \yii\db\ActiveRecord
             [['servicio', 'user', 'trabajador', 'direccion'], 'integer'],
             [['fecha_inicia', 'fecha_creacion'], 'safe'],
             [['semanal', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'], 'string', 'max' => 1],
-            [['trabajador'], 'exist', 'skipOnError' => true, 'targetClass' => Trabajador::className(), 'targetAttribute' => ['trabajador' => 'id']],
             [['servicio'], 'exist', 'skipOnError' => true, 'targetClass' => Servicios::className(), 'targetAttribute' => ['servicio' => 'id']],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
             [['direccion'], 'exist', 'skipOnError' => true, 'targetClass' => Direccion::className(), 'targetAttribute' => ['direccion' => 'id']],
+            [['trabajador'], 'exist', 'skipOnError' => true, 'targetClass' => Trabajador::className(), 'targetAttribute' => ['trabajador' => 'id']],
         ];
     }
 
@@ -82,14 +82,6 @@ class Plane extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTrabajador0()
-    {
-        return $this->hasOne(Trabajador::className(), ['id' => 'trabajador']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getServicio0()
     {
         return $this->hasOne(Servicios::className(), ['id' => 'servicio']);
@@ -109,5 +101,13 @@ class Plane extends \yii\db\ActiveRecord
     public function getDireccion0()
     {
         return $this->hasOne(Direccion::className(), ['id' => 'direccion']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTrabajador0()
+    {
+        return $this->hasOne(Trabajador::className(), ['id' => 'trabajador']);
     }
 }

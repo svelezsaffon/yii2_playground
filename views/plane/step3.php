@@ -1,39 +1,45 @@
-<h2>¿Que direccion quieres utilizar?</h2>
-
-
 <div class="container">
 
 <?php	
-	foreach ($direcciones as $direccion){
-?>
-	<div class="row">
-    	<div class="col">
-
-      		<div class="panel panel-info">
-  				
+	$dires=array();
+	$index=0;
+	foreach ($direcciones as $servicioe){
+		$dires[$index]=$servicioe;
+		$index=$index+1;
+	}
+	
+	 echo $form->field($model, 'direccion')->radioList(
+    	$dires	,
+    ['item' => function ($index, $label, $name, $checked, $value) {
+        return
+        '
+        	<div class="row">
+    			<div class="col">
+      		<div class="panel panel-info">  				
   				<div class="panel-heading">
-  					<?= $direccion->nombre ?>  						
-				</div>
-				
+  					'.$label->nombre.'
+				</div>				
 				<div class="panel-body">  		
 					<div class="container">
   						<div class="row">			
-							<div class="col col-lg-10">
-								<?= $direccion->direccion ?>   
+							<div class="col col-lg-10">								   
+								'.$label->direccion.'
     						</div>
-    						<div class="col col-lg-2">
-								<?= $form->field($model, 'direccion')->radio(['label' => 'Selecionar', 'value' => $direccion->id]) ?>
+    						<div class="col col-lg-2">    	
+    						'.\yii\bootstrap\Html::radio($name, $checked,['value' => $label->id,'label' => 'Seleccionar',]).'
 							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>   
-
 		</div>
-	</div>			   	
-<?php
-	}
-?>				
+	</div>	
+        ';
+    }]
+)->label(false);
+	
+?>
+
+				
 
 </div>

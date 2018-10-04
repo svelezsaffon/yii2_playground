@@ -20,18 +20,19 @@ use yii\widgets\ActiveForm;
 
     <?= $model->fecha_creacion; ?>
 
-    <?= $model->lunes===true?"Lunes":"Not lunes";?>
+    <?= $model->lunes==true?"Lunes":"Not lunes";?>
     
-    <?= $model->martes===true?"martes":"Not martes";?>
+    <?= $model->martes==true?"martes":"Not martes";?>
     
-    <?= $model->miercoles===true?"miercoles":"Not miercoles";?>
+    <?= $model->miercoles==true?"miercoles":"Not miercoles";?>
     
-    <?= $model->jueves===true?"jueves":"Not jueves";?>
+    <?= $model->jueves==true?"jueves":"Not jueves";?>
     
-    <?= $model->viernes===true?"viernes":"Not viernes";?>
+    <?= $model->viernes==true?"viernes":"Not viernes";?>
     
-    <?= $model->sabado===true?"sabado":"Not sabado";?>
+    <?= $model->sabado==true?"sabado":"Not sabado";?>
 
-    <?= $model->domingo===true?"domingo":"Not domingo";?>
+    <?= $model->domingo==true?"domingo":"Not domingo";?>
 
+    <?= Html::submitButton('Save', ['class' => 'btn btn-success'])?>
 </div>
