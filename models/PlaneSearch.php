@@ -19,7 +19,7 @@ class PlaneSearch extends Plane
     {
         return [
             [['id', 'servicio', 'user', 'trabajador', 'direccion'], 'integer'],
-            [['semanal', 'fecha_inicia', 'fecha_creacion', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'], 'safe'],
+            [['semanal', 'fecha_inicia', 'fecha_creacion', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo', 'timepo'], 'safe'],
         ];
     }
 
@@ -75,7 +75,8 @@ class PlaneSearch extends Plane
             ->andFilterWhere(['like', 'jueves', $this->jueves])
             ->andFilterWhere(['like', 'viernes', $this->viernes])
             ->andFilterWhere(['like', 'sabado', $this->sabado])
-            ->andFilterWhere(['like', 'domingo', $this->domingo]);
+            ->andFilterWhere(['like', 'domingo', $this->domingo])
+            ->andFilterWhere(['like', 'timepo', $this->timepo]);
 
         return $dataProvider;
     }

@@ -40,7 +40,8 @@ class PlaneController extends Controller
     {
         $searchModel = new PlaneSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->query->andWhere(['user'=>Yii::$app->user->id]);
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -55,8 +56,34 @@ class PlaneController extends Controller
      */
     public function actionView($id)
     {
+        $model=$this->findModel($id);
+
+        $dir= Direccion::find()->where(['id' => $model->direccion])->one();
+        $serv= Servicios::find()->where(['id' => $model->servicio])->one();
+        $trab= Trabajador::find()->where(['id' => $model->trabajador])->one();
+
+        $obj = (object) array(
+            'id'=>$model->id,
+            'tiempo'=>$model->timepo,
+            'name'=>'Plan '.$serv->nombre.' que inicia '.$model->fecha_inicia,            
+            'user'=>Yii::$app->user->id,
+            'trabajador'=>$trab->nombre.' '.$trab->apellido,
+            'servicio'=>$serv->nombre,
+            'semanal'=>$model->semanal,
+            'fecha_inicia'=>$model->fecha_inicia,
+            'fecha_creacion'=>$model->fecha_creacion,
+            'lunes'=>$model->lunes,
+            'martes'=>$model->martes,
+            'miercoles'=>$model->miercoles,
+            'jueves'=>$model->jueves,
+            'viernes'=>$model->viernes,
+            'sabado'=>$model->sabado,
+            'domingo'=>$model->domingo,
+            'direccion'=>$dir->direccion,
+            );
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $obj,
         ]);
     }
 
@@ -76,7 +103,7 @@ class PlaneController extends Controller
         }
 
         $servicioModel = Servicios::find()->all();
-        $direccionesModel = Direccion::find()->all();
+        $direccionesModel = Direccion::find()->where(['user' => $model->user])->all();
         $trabajadorModel = Trabajador::find()->all();
 
         return $this->render('create', [

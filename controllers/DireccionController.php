@@ -37,6 +37,7 @@ class DireccionController extends Controller
     {
         $searchModel = new DireccionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['user'=>Yii::$app->user->id]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

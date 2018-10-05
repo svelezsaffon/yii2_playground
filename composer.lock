@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d776c961ab287051fc60283a311d6c3",
+    "content-hash": "9dfce8c031d45ee5766ab52eaa1d039b",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -66,6 +66,65 @@
                 "yii2"
             ],
             "time": "2017-07-05T05:52:03+00:00"
+        },
+        {
+            "name": "bookin/yii2-awesome-bootstrap-checkbox",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bookin/yii2-awesome-bootstrap-checkbox.git",
+                "reference": "1bc735483c0dd12b67e5e023edc3a6056379c503"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bookin/yii2-awesome-bootstrap-checkbox/zipball/1bc735483c0dd12b67e5e023edc3a6056379c503",
+                "reference": "1bc735483c0dd12b67e5e023edc3a6056379c503",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/awesome-bootstrap-checkbox": "0.3.*",
+                "fortawesome/font-awesome": "*",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "bookin\\aws\\checkbox\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Anton",
+                    "email": "issues.bookin@gmail.com"
+                }
+            ],
+            "description": "Yii2 widget for awesome-bootstrap-checkbox",
+            "time": "2016-07-25T13:48:00+00:00"
+        },
+        {
+            "name": "bower-asset/awesome-bootstrap-checkbox",
+            "version": "v0.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flatlogic/awesome-bootstrap-checkbox.git",
+                "reference": "b9114537e94a36be2d1abe2c528f25be05d9282a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flatlogic/awesome-bootstrap-checkbox/zipball/b9114537e94a36be2d1abe2c528f25be05d9282a",
+                "reference": "b9114537e94a36be2d1abe2c528f25be05d9282a",
+                "shasum": null
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "bower-asset/bootstrap",
@@ -341,6 +400,54 @@
                 "html"
             ],
             "time": "2018-02-23T01:58:20+00:00"
+        },
+        {
+            "name": "fortawesome/font-awesome",
+            "version": "v4.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/a8386aae19e200ddb0f6845b5feeee5eb7013687",
+                "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687",
+                "shasum": ""
+            },
+            "require-dev": {
+                "jekyll": "1.0.2",
+                "lessc": "1.4.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.6.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OFL-1.1",
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dave Gandy",
+                    "email": "dave@fontawesome.io",
+                    "homepage": "http://twitter.com/davegandy",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The iconic font and CSS framework",
+            "homepage": "http://fontawesome.io/",
+            "keywords": [
+                "FontAwesome",
+                "awesome",
+                "bootstrap",
+                "font",
+                "icon"
+            ],
+            "time": "2016-10-24T15:52:54+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3358,7 +3465,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "bookin/yii2-awesome-bootstrap-checkbox": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

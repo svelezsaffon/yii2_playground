@@ -3,15 +3,11 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\datepicker\DatePicker;
-/* @var $this yii\web\View */
-/* @var $model app\models\Plane */
-/* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="plane-form">
 <?php 
-
-
 
 
 $form = ActiveForm::begin(['options' => ['role' => 'form']]);     
@@ -66,13 +62,14 @@ $wizard_config = [
             'title' => 'Trabajador',
             'icon' => 'glyphicon glyphicon-user',
             'content' =>  Yii::$app->controller->renderPartial('step4', ['model' => $model,'form'=>$form,'trabajadores'=>$trabajadorModel]),
-            'buttons' => [
+            'buttons' => [  
                 'next' => [
                     'title' => 'Siguiente', 
                     'options' => [
                         'class' => 'btn btn-primary'
                     ],
-                 ],
+                 ],                
+
              ],
         ],
          5=> [
@@ -82,6 +79,7 @@ $wizard_config = [
         ],
 
     ],
+    'start_step' =>1,    
     
 ];
 

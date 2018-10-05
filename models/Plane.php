@@ -22,6 +22,7 @@ use Yii;
  * @property int $sabado
  * @property int $domingo
  * @property int $direccion
+ * @property string $timepo
  *
  * @property Servicios $servicio0
  * @property User $user0
@@ -44,10 +45,11 @@ class Plane extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['servicio', 'user', 'trabajador', 'semanal', 'fecha_inicia', 'fecha_creacion', 'direccion'], 'required'],
+            [['servicio', 'user', 'trabajador', 'semanal', 'fecha_inicia', 'fecha_creacion', 'direccion', 'timepo'], 'required'],
             [['servicio', 'user', 'trabajador', 'direccion'], 'integer'],
             [['fecha_inicia', 'fecha_creacion'], 'safe'],
             [['semanal', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'], 'string', 'max' => 1],
+            [['timepo'], 'string', 'max' => 10],
             [['servicio'], 'exist', 'skipOnError' => true, 'targetClass' => Servicios::className(), 'targetAttribute' => ['servicio' => 'id']],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
             [['direccion'], 'exist', 'skipOnError' => true, 'targetClass' => Direccion::className(), 'targetAttribute' => ['direccion' => 'id']],
@@ -76,6 +78,7 @@ class Plane extends \yii\db\ActiveRecord
             'sabado' => 'Sabado',
             'domingo' => 'Domingo',
             'direccion' => 'Direccion',
+            'timepo' => 'Timepo',
         ];
     }
 

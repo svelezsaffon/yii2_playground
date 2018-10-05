@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'sabado',
             //'domingo',
             //'direccion',
+            //'timepo',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

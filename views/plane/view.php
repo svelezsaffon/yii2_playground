@@ -6,11 +6,13 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Plane */
 
-$this->title = $model->id;
+$this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Planes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="plane-view">
+
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -28,9 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'servicio',
-            'user',
+            'tiempo',
+            'name',
+            'servicio',                        
             'trabajador',
             'semanal',
             'fecha_inicia',

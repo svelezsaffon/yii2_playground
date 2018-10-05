@@ -35,8 +35,7 @@ class Direccion extends \yii\db\ActiveRecord
             [['user', 'direccion', 'nombre'], 'required'],
             [['user'], 'integer'],
             [['direccion', 'puntos_referencia', 'quien_recibe'], 'string'],
-            [['nombre'], 'string', 'max' => 200],
-            [['user'], 'unique'],
+            [['nombre'], 'string', 'max' => 200],            
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
         ];
     }

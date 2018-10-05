@@ -15,7 +15,7 @@
         '
         	<div class="row">
     			<div class="col">
-      		<div class="panel panel-info">  				
+      		<div class="panel panel-default">  				
   				<div class="panel-heading">
   					'.$label->nombre.'
 				</div>				
