@@ -3,19 +3,19 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Plane;
+use app\models\Servicioxdia;
+use app\models\ServicioxdiaSearch;
 use app\models\Servicios;
 use app\models\Direccion;
 use app\models\Trabajador;
-use app\models\PlaneSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PlaneController implements the CRUD actions for Plane model.
+ * ServicioxdiaController implements the CRUD actions for Servicioxdia model.
  */
-class PlaneController extends Controller
+class ServicioxdiaController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,15 +33,14 @@ class PlaneController extends Controller
     }
 
     /**
-     * Lists all Plane models.
+     * Lists all Servicioxdia models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PlaneSearch();
+        $searchModel = new ServicioxdiaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->andWhere(['user'=>Yii::$app->user->id]);
-        
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -49,54 +48,32 @@ class PlaneController extends Controller
     }
 
     /**
-     * Displays a single Plane model.
+     * Displays a single Servicioxdia model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $model=$this->findModel($id);
-
-        $dir= Direccion::find()->where(['id' => $model->direccion])->one();
-        $serv= Servicios::find()->where(['id' => $model->servicio])->one();
-        $trab= Trabajador::find()->where(['id' => $model->trabajador])->one();
-
-        $obj = (object) array(
-            'id'=>$model->id,
-            'tiempo'=>$model->timepo,
-            'name'=>'Plan '.$serv->nombre.' que inicia '.$model->fecha_inicia,            
-            'user'=>Yii::$app->user->id,
-            'trabajador'=>$trab->nombre.' '.$trab->apellido,
-            'servicio'=>$serv->nombre,
-            'semanal'=>$model->semanal,
-            'fecha_inicia'=>$model->fecha_inicia,
-            'fecha_creacion'=>$model->fecha_creacion,
-            'lunes'=>$model->lunes,
-            'martes'=>$model->martes,
-            'miercoles'=>$model->miercoles,
-            'jueves'=>$model->jueves,
-            'viernes'=>$model->viernes,
-            'sabado'=>$model->sabado,
-            'domingo'=>$model->domingo,
-            'direccion'=>$dir->direccion,
-            );
-
         return $this->render('view', [
-            'model' => $obj,
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Plane model.
+     * Creates a new Servicioxdia model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Plane();
-        $model->user=Yii::$app->user->id;   
-        $model->fecha_creacion=date("Y-m-d");
+        $model = new Servicioxdia();
+        $model->user=Yii::$app->user->id; 
+        
+        if(isset($_GET["serv"]) ){
+            $model->servicio=intval($_GET["serv"]-1);
+            $step=$_GET["step"];
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -107,13 +84,12 @@ class PlaneController extends Controller
         $trabajadorModel = Trabajador::find()->all();
 
         return $this->render('create', [
-            'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
+            'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel,'step'=>isset($_GET["step"])?$_GET["step"]:1,
         ]);
-
     }
 
     /**
-     * Updates an existing Plane model.
+     * Updates an existing Servicioxdia model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -127,17 +103,18 @@ class PlaneController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        
         $servicioModel = Servicios::find()->all();
-        $direccionesModel = Direccion::find()->all();
+        $direccionesModel = Direccion::find()->where(['user' => $model->user])->all();
         $trabajadorModel = Trabajador::find()->all();
 
         return $this->render('update', [
-              'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
+            'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel,'step'=>isset($_GET["step"])?$_GET["step"]:1,
         ]);
     }
 
     /**
-     * Deletes an existing Plane model.
+     * Deletes an existing Servicioxdia model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -151,15 +128,15 @@ class PlaneController extends Controller
     }
 
     /**
-     * Finds the Plane model based on its primary key value.
+     * Finds the Servicioxdia model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Plane the loaded model
+     * @return Servicioxdia the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Plane::findOne($id)) !== null) {
+        if (($model = Servicioxdia::findOne($id)) !== null) {
             return $model;
         }
 

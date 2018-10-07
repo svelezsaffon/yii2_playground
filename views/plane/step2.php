@@ -22,7 +22,7 @@ use bookin\aws\checkbox\AwesomeCheckbox;
           'template' => '<div class="well">{input}</div>',
           'clientOptions' => [
           'autoclose' => true,
-          
+          'startDate' => date('Y-m-d', time()+86400),
           'format' => 'yyyy-mm-dd'
           ]
 

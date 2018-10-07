@@ -21,7 +21,7 @@ use lo\widgets\modal\ModalAjax;
         if($upuser == false){
         ?>
         <h1>Hola, <?=$userinfo->nombre?> <?=$userinfo->apellidos?>!</h1>
-          <?=Yii::$app->controller->renderPartial('index_body_login');?>
+          <?=Yii::$app->controller->renderPartial('index_body_login',['allServicios'=>$allServicios]);?>
         <?php }else{?>
 
          <div class="alert alert-danger" role="alert">
