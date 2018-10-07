@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9dfce8c031d45ee5766ab52eaa1d039b",
+    "content-hash": "c4fe8eee3593bc205547d6dd79217fb0",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -448,6 +448,50 @@
                 "icon"
             ],
             "time": "2016-10-24T15:52:54+00:00"
+        },
+        {
+            "name": "loveorigami/yii2-modal-ajax",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/loveorigami/yii2-modal-ajax.git",
+                "reference": "0f7e435aba4ba4c2efb59e8ea056797a284ec04e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/loveorigami/yii2-modal-ajax/zipball/0f7e435aba4ba4c2efb59e8ea056797a284ec04e",
+                "reference": "0f7e435aba4ba4c2efb59e8ea056797a284ec04e",
+                "shasum": ""
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "lo\\widgets\\modal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Karnbrock Gmbh",
+                    "homepage": "http://karnbrock.biz"
+                },
+                {
+                    "name": "Lukyanov Andrey",
+                    "homepage": "http://loveorigami.info"
+                }
+            ],
+            "description": "A wrapper around Yii2 Bootstrap Modal for using an ActiveForm via AJAX inside",
+            "homepage": "https://github.com/loveorigami/yii2-modal-ajax",
+            "keywords": [
+                "ajax-modal",
+                "bootstrap",
+                "modal",
+                "yii2"
+            ],
+            "time": "2018-08-07T06:07:39+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3466,7 +3510,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "bookin/yii2-awesome-bootstrap-checkbox": 20
+        "bookin/yii2-awesome-bootstrap-checkbox": 20,
+        "loveorigami/yii2-modal-ajax": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

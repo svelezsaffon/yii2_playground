@@ -108,7 +108,7 @@ use bookin\aws\checkbox\AwesomeCheckbox;
       <?php 
   
    echo $form->field($model, 'timepo')->radioList(
-      ['4am'=>"4 Madrugada",'4pm'=>"4 Tarde",'8ful'=>"8 Tiempo completo"]      ,
+      ['4am'=>"4 Horas - 8:00am a 12:00pm",'4pm'=>"4 Horas - 1:30pm a 5:30pm",'8ful'=>"8 Horas - 8:00am a 5:00pm"]      ,
     ['item' => function ($index, $label, $name, $checked, $value) {
         return 
         '

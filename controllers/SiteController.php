@@ -7,9 +7,11 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use app\models\Servicios;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignupForm;
+use app\models\UserInfo;
 
 class SiteController extends Controller
 {
@@ -62,7 +64,19 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+         $servicioModel = Servicios::find()->all();
+
+         if(Yii::$app->user->isGuest){
+            return $this->render('index',['allServicios'=>$servicioModel]);        
+         }else{
+
+            $userinfo= UserInfo::find()->where(['user'=>Yii::$app->user->id])->one();
+
+            return $this->render('index',['allServicios'=>$servicioModel,'userinfo'=>$userinfo,'upuser'=>$userinfo==NULL?true:false]);            
+         }
+         
+
+        
     }
 
     /**
@@ -129,7 +143,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-
+                                    
                     return $this->goHome();
                 }
             }
