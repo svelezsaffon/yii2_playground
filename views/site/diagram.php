@@ -201,8 +201,11 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12">          
-     <a class="btn btn-success" href="/basic/web/index.php?r=site%2Fsignup">Create Plane</a>
+    <div class="col-xs-6">          
+     <a class="btn btn-success" href="/basic/web/index.php?r=site/signup">Quiero registrarme!</a>
+   </div>
+   <div class="col-xs-6">          
+     <a class="btn btn-success" href="/basic/web/index.php?r=site/login">Ya tengo cuenta!</a>
    </div>
  </div>
 

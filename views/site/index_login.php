@@ -51,7 +51,6 @@ use lo\widgets\modal\ModalAjax;
         
         <?php }?>
 
-
       
     </div>
   </div>
