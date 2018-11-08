@@ -6,6 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+    'language' => 'es',
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -15,7 +16,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'buscandoTrabajo',
-        ],
+        ],        
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -25,6 +26,17 @@ $config = [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+        'assetManager' => [
+            'bundles' => [
+                'dosamigos\google\maps\MapAsset' => [
+                    'options' => [
+                        'key' => 'AIzaSyD5BJZw2s9kaHkVsAoODp5i1xkfet2-wsI',
+                        'language' => 'es',
+                        'version' => '3.1.18'
+                    ]
+                ]
+            ]
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -41,6 +53,11 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+
+        'authManager'=>[
+            'class'=>'yii\rbac\DbManager',
+            'defaultRoles'=>['guest'],
         ],
 
         'db' => $db,

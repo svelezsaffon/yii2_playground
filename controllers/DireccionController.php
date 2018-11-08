@@ -8,7 +8,7 @@ use app\models\DireccionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * DireccionController implements the CRUD actions for Direccion model.
  */
@@ -20,6 +20,16 @@ class DireccionController extends Controller
     public function behaviors()
     {
         return [
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'only'=>['create','createmodal','update','index','delete','view'],
+                'rules'=>[
+                    [
+                        'allow'=>true,
+                        'roles'=>['@']
+                    ]
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -39,9 +49,12 @@ class DireccionController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere(['user'=>Yii::$app->user->id]);
 
+        $dir= Direccion::find()->where(['user'=>Yii::$app->user->id])->all() ;
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'direcciones' => $dir,
         ]);
     }
 
@@ -81,6 +94,31 @@ class DireccionController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionCreatemodal($loc)
+    {
+        $model = new Direccion();
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            
+            $model->user=Yii::$app->user->id;
+
+            if($model->save()){
+                if($loc==10){
+                    return $this->redirect(['/servicioxdia/create', 'id' => $model->id]);    
+                }else{
+                    return $this->redirect(['/plane/create', 'id' => $model->id]);    
+                }
+
+            }
+            
+        }
+
+        return $this->renderAjax('createmodal', [
+            'model' => $model,
+        ]);
+    }
+
 
     /**
      * Updates an existing Direccion model.

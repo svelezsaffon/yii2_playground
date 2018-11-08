@@ -8,7 +8,7 @@ use app\models\TrabajadorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * TrabajadorController implements the CRUD actions for Trabajador model.
  */
@@ -20,12 +20,22 @@ class TrabajadorController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
+        'access'=>[
+        'class'=>AccessControl::className(),
+        'only'=>['create','update','index','delete','view'],
+        'rules'=>[
+        [
+        'allow'=>true,
+        'roles'=>['@']
+        ]
+        ]
+        ],
+        'verbs' => [
+        'class' => VerbFilter::className(),
+        'actions' => [
+        'delete' => ['POST'],
+        ],
+        ],
         ];
     }
 
@@ -35,13 +45,20 @@ class TrabajadorController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TrabajadorSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(Yii::$app->user->can('create-trabajador')){
+            $searchModel = new TrabajadorSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                ]);
+
+        }else{
+            
+            return $this->redirect(['/']);
+
+        }
     }
 
     /**
@@ -52,9 +69,15 @@ class TrabajadorController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(Yii::$app->user->can('create-trabajador')){
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+                ]);
+        }else{
+            
+            return $this->redirect(['/']);
+
+        }
     }
 
     /**
@@ -64,15 +87,22 @@ class TrabajadorController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Trabajador();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if(Yii::$app->user->can('create-trabajador')){
+            $model = new Trabajador();
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+                ]);
+        }else{
+            
+            return $this->redirect(['/']);
+
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -84,15 +114,21 @@ class TrabajadorController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if(Yii::$app->user->can('create-trabajador')){
+            $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+                ]);
+        }else{
+            
+            return $this->redirect(['/']);
+
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -104,9 +140,15 @@ class TrabajadorController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if(Yii::$app->user->can('create-trabajador')){
+            $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        }else{
+            
+            return $this->redirect(['/']);
+
+        }
     }
 
     /**
@@ -118,10 +160,16 @@ class TrabajadorController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Trabajador::findOne($id)) !== null) {
-            return $model;
-        }
+        if(Yii::$app->user->can('create-trabajador')){
+            if (($model = Trabajador::findOne($id)) !== null) {
+                return $model;
+            }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }else{
+            
+            return $this->redirect(['/']);
+
+        }
     }
 }

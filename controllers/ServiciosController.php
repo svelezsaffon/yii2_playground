@@ -8,24 +8,34 @@ use app\models\ServiciosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * ServiciosController implements the CRUD actions for Servicios model.
  */
 class ServiciosController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
+        'access'=>[
+        'class'=>AccessControl::className(),
+        'only'=>['create','update','index','delete','view'],
+        'rules'=>[
+        [
+        'allow'=>true,
+        'roles'=>['@']
+        ]
+        ]
+        ],
+        'verbs' => [
+        'class' => VerbFilter::className(),
+        'actions' => [
+        'delete' => ['POST'],
+        ],
+        ],
         ];
     }
 
@@ -38,12 +48,10 @@ class ServiciosController extends Controller
         $searchModel = new ServiciosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
+            ]);
     }
 
     /**
@@ -54,9 +62,19 @@ class ServiciosController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+
+        if(Yii::$app->user->can('create-service')){
+
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+                ]);
+            
+        }else{
+            
+            return $this->redirect(['/']);
+
+        }
+
     }
 
     /**
@@ -66,15 +84,26 @@ class ServiciosController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Servicios();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if(Yii::$app->user->can('create-service')){
+            
+            $model = new Servicios();
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+                ]);    
+
+        }else{
+            
+            return $this->redirect(['/']);
+
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        
     }
 
     /**
@@ -86,6 +115,9 @@ class ServiciosController extends Controller
      */
     public function actionUpdate($id)
     {
+
+       if(Yii::$app->user->can('create-service')){
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -94,8 +126,14 @@ class ServiciosController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-        ]);
+            ]);
+
+    }else{
+        
+        return $this->redirect(['/']);
+
     }
+}
 
     /**
      * Deletes an existing Servicios model.
@@ -106,10 +144,18 @@ class ServiciosController extends Controller
      */
     public function actionDelete($id)
     {
+
+       if(Yii::$app->user->can('create-service')){
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+
+    }else{
+        
+        return $this->redirect(['/']);
+
     }
+}
 
     /**
      * Finds the Servicios model based on its primary key value.
@@ -120,10 +166,18 @@ class ServiciosController extends Controller
      */
     protected function findModel($id)
     {
+
+       if(Yii::$app->user->can('create-service')){
         if (($model = Servicios::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+
+    }else{
+        
+        return $this->redirect(['/']);
+
     }
+}
 }

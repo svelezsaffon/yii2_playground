@@ -1,22 +1,155 @@
+<?php 
+use app\models\SignupForm;
+?>
+
 <!DOCTYPE html>
+
+
+
 <html lang="en">
 
 
 <body id="page-top" class="index">
 
     <!-- Navigation -->
- 
+
 
     <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="intro-text">
-                <div class="intro-lead-in">Bienvenido a Servicio 24/7</div>                
-                <a href="#services" class="page-scroll btn btn-primary">quiero saber mas!!</a>
-            </div>
-        </div>
-    </header>
 
+    <section id="register">
+        <div class="container">   
+        <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Servicios</h2>
+                    <h3 class="section-subheading text-muted">
+                        Estos son los servicios que tenemos a dispocion (Estamos trabajando para añadir mas!)
+                    </h3>
+                </div>
+            </div>         
+
+            <div class="row">
+
+                <div class="col-lg-7 text-left">
+                    <!--<img class="img-responsive text-left" src="img/logo.jpg" alt="">-->
+                    <br/>
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <div class="row">
+                                <div class="col-md-1">                            
+
+                                    <span class="fa-stack fa-2x" >        
+                                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>        
+                                        <i class="fa fa-gavel fa-stack-1x fa-inverse"></i>        
+                                    </span>
+                                </div>
+                                <div class="col-md-11">
+                                    <h4>
+                                        Ud está contratando un servicio con una persona que cumple con todos los requisitos legales de la legislación Colombiana.
+                                    </h4>
+                                </div>
+                            </div>
+
+                        </div>                        
+                    </div>
+                    <br/>
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-md-1">                            
+
+                                    <span class="fa-stack fa-2x" >        
+                                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>        
+                                        <i class="fa fa-chess-knight fa-stack-1x fa-inverse"></i>        
+                                    </span>
+                                </div>
+                                <div class="col-md-11">
+                                    <h4>
+                                        Ud puede olvidarse de cualquier problema, o demanda laboral, ya que ud no es el empleador de la persona que le presta su servicio.
+                                    </h4>
+                                </div>
+                            </div>
+
+                        </div>                        
+                    </div>
+                    <br/>
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-md-1">                            
+
+                                    <span class="fa-stack fa-2x" >        
+                                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>        
+                                        <i class="fa fa-calendar-alt fa-stack-1x fa-inverse"></i>        
+                                    </span>
+                                </div>
+                                <div class="col-md-11">
+                                    <h4>
+                                        Ud contrata una persona , por el tiempo estrictamente necesario y ajustado a su presupuesto.
+                                    </h4>
+                                </div>
+                            </div>                        
+                        </div>                        
+                    </div>
+                    <br/>
+
+                    <div class="row">                        
+                        <div class="col-lg-12">
+
+                            <div class="row">
+                                <div class="col-md-1">                            
+
+                                    <span class="fa-stack fa-2x" >        
+                                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>        
+                                        <i class="fa fa-credit-card fa-stack-1x fa-inverse"></i>        
+                                    </span>
+                                </div>
+                                <div class="col-md-11">
+                                    <h4>
+                                        Ud debe pagar electrónicamente su servicio, de manera que no habrá manejo de efectivo
+                                    </h4>
+                                </div>
+                            </div>                                                      
+                        </div>                        
+                    </div>
+                    <br/>
+
+                </div>
+
+                <div class="col-lg-5 text-left">
+                    <div  class="panel panel-default">
+                        <div class="panel-body">
+                        <?php                     
+                            echo Yii::$app->controller->renderPartial('simple_login', ['model' => $login_model,]);
+                        ?>
+                        </div>
+                    </div>
+                    
+                    <div  class="panel panel-default">
+                        <div class="panel-body">
+                        <?php                     
+                            echo Yii::$app->controller->renderPartial('signup', ['model' => $model,]);
+                        ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+
+            
+        </div>
+
+    </section>
     <!-- Services Section -->
     <section id="services">
         <div class="container">
@@ -24,14 +157,14 @@
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Servicios</h2>
                     <h3 class="section-subheading text-muted">
-                    Estos son los servicios que tenemos a dispocion (Estamos trabajando para añadir mas!)
+                        Estos son los servicios que tenemos a dispocion (Estamos trabajando para añadir mas!)
                     </h3>
                 </div>
             </div>
             <div class="row text-center">                
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>
                         <i class="fa fa-home fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">Domestico</h4>
@@ -41,7 +174,7 @@
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>
                         <i class="fa fa-car fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">Conductor</h4>
@@ -51,7 +184,7 @@
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>
                         <i class="fa fa-motorcycle fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">Mensajeria</h4>
@@ -60,12 +193,21 @@
                     </p>
                 </div>
             </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            
+
         </div>
     </section>
 
 
     <!-- About Section -->
-    <section id="about">
+    <section id="proceso">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -76,168 +218,103 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="timeline">
+
+                        <li class="timeline-inverted">
+                            <div class="timeline-image yeti">
+                                <span class="fa-stack fa-5x">                                    
+                                    <i class="fa fa-book fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Registrarse</h4>
+                                    <h4 class="subheading">Unirse a la comunidad</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lo primero que tienes que hacer es registrarte en la pagina. Esto significa que dees crear un usuario y una contraseña, asi puedes volver cada vez e ingresar para uscar nuevos servicios </p>
+                                </div>
+                            </div>
+                        </li>
+
+
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/1.jpg" alt="">
-                                
+                                <span class="fa-stack fa-5x">                                    
+                                    <i class="fa fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                                </span>
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>2009-2011</h4>
-                                    <h4 class="subheading">Our Humble Beginnings</h4>
+                                    <h4>Dia o Plan</h4>
+                                    
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">Puedes escoger si solo necesitas tu servicio un dia especifico, o puedes seleccionar que el servicio sea recurrente.</p>
                                 </div>
                             </div>
-                        </li>
+                        </li>                        
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/2.jpg" alt="">
+                                <span class="fa-stack fa-5x">                                    
+                                    <i class="fa fa-hands-helping fa-stack-1x fa-inverse"></i>
+                                </span>
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>March 2011</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
+                                    <h4>Servicio</h4>
+                                    <h4 class="subheading">Que tipo de servicio necesitas</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">Ofrecemos gran variedad de servicios que te pueden ayudar con tu dia a dia</p>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/3.jpg" alt="">
+                                <span class="fa-stack fa-5x">                                    
+                                    <i class="fa fa-cogs fa-stack-1x fa-inverse"></i>
+                                </span>
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>December 2012</h4>
-                                    <h4 class="subheading">Transition to Full Service</h4>
+                                    <h4>Configuracion</h4>
+                                    <h4 class="subheading">Configura tu servicio a tus nececidades</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">La configuracion del servicio es la parte mas importante, debes decirnso que dia lo necesitas, en que direccion y puedes escoger de una gran lista de empleados quien relaizar tu servicio</p>
                                 </div>
                             </div>
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
+                                <span class="fa-stack fa-5x">                                    
+                                    <i class="fa fa-credit-card fa-stack-1x fa-inverse"></i>
+                                </span>
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>July 2014</h4>
-                                    <h4 class="subheading">Phase Two Expansion</h4>
+                                    <h4>El pago</h4>
+                                    <h4 class="subheading">Debes pagar por tu servicio</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">Debes hacer el pago de tu servicio un dia antes de que este llegue, si no recibimos tu pago el dia antes, no veremos obligado a cancelar tu servicio. Claro que te llamaremos y haremos todo lo posible por recordarte</p>
                                 </div>
                             </div>
-                        </li>
+                        </li>                        
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <h4>Be Part
-                                    <br>Of Our
-                                    <br>Story!</h4>
-                            </div>
+                                <h4>
+                                    Listo!!
+                                    <br>Es asi 
+                                    <br>de facil
+                                </h4>
+                            </div>                            
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Team Section -->
-    <section id="team" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Kay Garland</h4>
-                        <p class="text-muted">Lead Designer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Larry Parker</h4>
-                        <p class="text-muted">Lead Marketer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Diana Pertersen</h4>
-                        <p class="text-muted">Lead Developer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Clients Aside -->
-    <aside class="clients">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">
-                        <img src="img/logos/envato.jpg" class="img-responsive img-centered" alt="">
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">
-                        <img src="img/logos/designmodo.jpg" class="img-responsive img-centered" alt="">
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">
-                        <img src="img/logos/themeforest.jpg" class="img-responsive img-centered" alt="">
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">
-                        <img src="img/logos/creative-market.jpg" class="img-responsive img-centered" alt="">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </aside>
-
 
     <footer>
         <div class="container">
@@ -257,9 +334,9 @@
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
-                        <li><a href="#">Privacy Policy</a>
+                        <li><a href="#">Politica de privacidad</a>
                         </li>
-                        <li><a href="#">Terms of Use</a>
+                        <li><a href="#">Terminos de uso</a>
                         </li>
                     </ul>
                 </div>
@@ -267,204 +344,23 @@
         </div>
     </footer>
 
-    <!-- Portfolio Modals -->
-    <!-- Use the modals below to showcase details about your portfolio projects! -->
 
-    <!-- Portfolio Modal 1 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2>Project Name</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-responsive img-centered" src="img/portfolio/roundicons-free.png" alt="">
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                <p>
-                                    <strong>Want these icons in this portfolio item sample?</strong>You can download 60 of them for free, courtesy of <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>, or you can purchase the 1500 icon set <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.</p>
-                                <ul class="list-inline">
-                                    <li>Date: July 2014</li>
-                                    <li>Client: Round Icons</li>
-                                    <li>Category: Graphic Design</li>
-                                </ul>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- jQuery -->
+        <script src="vendor/jquery/jquery.min.js"></script>
 
-    <!-- Portfolio Modal 2 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <h2>Project Heading</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-responsive img-centered" src="img/portfolio/startup-framework-preview.png" alt="">
-                                <p><a href="http://designmodo.com/startup/?u=787">Startup Framework</a> is a website builder for professionals. Startup Framework contains components and complex blocks (PSD+HTML Bootstrap themes and templates) which can easily be integrated into almost any design. All of these components are made in the same style, and can easily be integrated into projects, allowing you to create hundreds of solutions for your future projects.</p>
-                                <p>You can preview Startup Framework <a href="http://designmodo.com/startup/?u=787">here</a>.</p>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Portfolio Modal 3 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2>Project Name</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-responsive img-centered" src="img/portfolio/treehouse-preview.png" alt="">
-                                <p>Treehouse is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. This is bright and spacious design perfect for people or startup companies looking to showcase their apps or other projects.</p>
-                                <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/treehouse-free-psd-web-template/">FreebiesXpress.com</a>.</p>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- Plugin JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
-    <!-- Portfolio Modal 4 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2>Project Name</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-responsive img-centered" src="img/portfolio/golden-preview.png" alt="">
-                                <p>Start Bootstrap's Agency theme is based on Golden, a free PSD website template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Golden is a modern and clean one page web template that was made exclusively for Best PSD Freebies. This template has a great portfolio, timeline, and meet your team sections that can be easily modified to fit your needs.</p>
-                                <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/golden-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- Contact Form JavaScript -->
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/contact_me.js"></script>
 
-    <!-- Portfolio Modal 5 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2>Project Name</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-responsive img-centered" src="img/portfolio/escape-preview.png" alt="">
-                                <p>Escape is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Escape is a one page web template that was designed with agencies in mind. This template is ideal for those looking for a simple one page solution to describe your business and offer your services.</p>
-                                <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/escape-one-page-psd-web-template/">FreebiesXpress.com</a>.</p>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- Theme JavaScript -->
+        <script src="js/agency.min.js"></script>
 
-    <!-- Portfolio Modal 6 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2>Project Name</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-responsive img-centered" src="img/portfolio/dreams-preview.png" alt="">
-                                <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It’s a beautiful template that’s designed with the Bootstrap framework in mind.</p>
-                                <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </body>
 
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
-
-    <!-- Theme JavaScript -->
-    <script src="js/agency.min.js"></script>
-
-</body>
-
-</html>
+    </html>

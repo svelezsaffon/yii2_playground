@@ -12,6 +12,8 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignupForm;
 use app\models\UserInfo;
+use app\models\Direccion;
+use app\models\Plane;
 
 class SiteController extends Controller
 {
@@ -65,9 +67,25 @@ class SiteController extends Controller
     public function actionIndex()
     {
          $servicioModel = Servicios::find()->all();
+         $model = new SignupForm(); 
 
-         if(Yii::$app->user->isGuest){
-            return $this->render('index',['allServicios'=>$servicioModel]);        
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {                                    
+                    return $this->goHome();
+                }
+            }
+        }
+
+
+        $login_model = new LoginForm();
+
+        if ($login_model->load(Yii::$app->request->post()) && $login_model->login()) {
+            return $this->goBack();
+            
+        }else if(Yii::$app->user->isGuest){
+            return $this->render('index',['allServicios'=>$servicioModel,'model'=>$model,'login_model'=>$login_model]);        
          }else{
 
             $userinfo= UserInfo::find()->where(['user'=>Yii::$app->user->id])->one();
@@ -139,7 +157,7 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-        $model = new SignupForm();
+        $model = new SignupForm(); 
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {

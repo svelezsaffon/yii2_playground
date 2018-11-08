@@ -11,7 +11,7 @@ use app\models\PlaneSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * PlaneController implements the CRUD actions for Plane model.
  */
@@ -23,29 +23,58 @@ class PlaneController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
+        'access'=>[
+        'class'=>AccessControl::className(),
+        'only'=>['create','update','index','delete','view'],
+        'rules'=>[
+        [
+        'allow'=>true,
+        'roles'=>['@']
+        ]
+        ]
+        ],
+        'verbs' => [
+        'class' => VerbFilter::className(),
+        'actions' => [
+        'delete' => ['POST'],
+        ],
+        ],
         ];
     }
+
 
     /**
      * Lists all Plane models.
      * @return mixed
      */
     public function actionIndex()
+
     {
-        $searchModel = new PlaneSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->andWhere(['user'=>Yii::$app->user->id]);
-        
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+
+        if(Yii::$app->user->can('admin')){
+
+            $searchModel = new PlaneSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                
+                ]);
+
+        }else{
+
+
+            $searchModel = new PlaneSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            $dir = Yii::$app->db->createCommand('SELECT plane.id, direccion.direccion as dir, direccion.nombre as dir_nombre, plane.fecha_inicia as fecha,plane.timepo as tiempo ,servicios.image as img, servicios.nombre as nombre,servicios.icon as icon FROM plane, servicios,direccion WHERE plane.user = '.Yii::$app->user->id.' and servicio= servicios.id and plane.direccion=direccion.id')->queryAll();
+
+            return $this->render('index', [
+                'planes'=>$dir,
+                ]);
+
+        }
     }
 
     /**
@@ -84,7 +113,7 @@ class PlaneController extends Controller
 
         return $this->render('view', [
             'model' => $obj,
-        ]);
+            ]);
     }
 
     /**
@@ -102,13 +131,14 @@ class PlaneController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+
         $servicioModel = Servicios::find()->all();
         $direccionesModel = Direccion::find()->where(['user' => $model->user])->all();
         $trabajadorModel = Trabajador::find()->all();
 
         return $this->render('create', [
             'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
-        ]);
+            ]);
 
     }
 
@@ -132,8 +162,8 @@ class PlaneController extends Controller
         $trabajadorModel = Trabajador::find()->all();
 
         return $this->render('update', [
-              'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
-        ]);
+          'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
+          ]);
     }
 
     /**

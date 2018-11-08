@@ -11,7 +11,7 @@ use app\models\Trabajador;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * ServicioxdiaController implements the CRUD actions for Servicioxdia model.
  */
@@ -23,12 +23,22 @@ class ServicioxdiaController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
+        'access'=>[
+        'class'=>AccessControl::className(),
+        'only'=>['create','update','index','delete','view'],
+        'rules'=>[
+        [
+        'allow'=>true,
+        'roles'=>['@']
+        ]
+        ]
+        ],
+        'verbs' => [
+        'class' => VerbFilter::className(),
+        'actions' => [
+        'delete' => ['POST'],
+        ],
+        ],
         ];
     }
 
@@ -38,13 +48,27 @@ class ServicioxdiaController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ServicioxdiaSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if(Yii::$app->user->can('admin')){
+
+            $searchModel = new ServicioxdiaSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,                
+                ]);
+
+        }else{
+
+            $query='SELECT servicioxdia.id as id,servicioxdia.tiempo as tiempo,servicioxdia.fecha_inicia as fecha, servicios.nombre as servicio,direccion.direccion as direccion,servicios.icon as icon  FROM servicioxdia,direccion,trabajador,servicios WHERE servicioxdia.direccion=direccion.id AND servicioxdia.trabajador=trabajador.id AND servicioxdia.servicio=servicios.id and servicioxdia.user='.Yii::$app->user->id; 
+
+            $servicios = Yii::$app->db->createCommand($query)->queryAll();
+
+            return $this->render('index', [                
+                'servicios' => $servicios,
+                ]);
+
+        }
     }
 
     /**
@@ -57,7 +81,7 @@ class ServicioxdiaController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
-        ]);
+            ]);
     }
 
     /**
@@ -85,7 +109,7 @@ class ServicioxdiaController extends Controller
 
         return $this->render('create', [
             'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel,'step'=>isset($_GET["step"])?$_GET["step"]:1,
-        ]);
+            ]);
     }
 
     /**
@@ -110,7 +134,7 @@ class ServicioxdiaController extends Controller
 
         return $this->render('update', [
             'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel,'step'=>isset($_GET["step"])?$_GET["step"]:1,
-        ]);
+            ]);
     }
 
     /**

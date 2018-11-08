@@ -22,7 +22,11 @@
         "drsdre/yii2-wizardwidget": "*",
         "2amigos/yii2-date-picker-widget": "~1.0",
         "bookin/yii2-awesome-bootstrap-checkbox": "@dev",
-        "loveorigami/yii2-modal-ajax": "@dev"
+        "loveorigami/yii2-modal-ajax": "@dev",
+        "pigochu/yii2-jquery-locationpicker": ">=0.2.0",
+        "philippfrenzel/yii2fullcalendar": "*",
+        "2amigos/yii2-leaflet-extension": "~1.0",
+        "2amigos/yii2-google-maps-library": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

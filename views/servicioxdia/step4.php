@@ -1,4 +1,30 @@
 <div class="container">
+
+<script>
+
+function myFunction4() {
+    var boxesEL=document.getElementsByName('Servicioxdia[trabajador]');    
+    
+    var found=false;
+    for(var x=0; x < boxesEL.length; x++)   // comparison should be "<" not "<="
+    {   
+      found=found || boxesEL[x].checked;
+    
+    }
+
+
+    if(found){      
+      document.getElementById('meserv4').style.display="none";      
+    }
+
+    var axu=document.getElementById('finalstepsave');
+
+
+
+    axu.disabled=!found;  
+}
+</script>
+
 <?php	
 	$dires=array();
 	$index=0;
@@ -25,8 +51,10 @@
 								'.$label->nombre.' '.$label->apellido.'
     						</div>
     						<div class="col col-lg-2">    	
-    						'.\yii\bootstrap\Html::radio($name, $checked,['value' => $label->id,'label' => 'Seleccionar',]).'
-							</div>
+                  <span class="badge">
+    						    '.\yii\bootstrap\Html::radio($name, $checked,['value' => $label->id,'onclick'=>"myFunction4()",'label' => 'Seleccionar',]).'
+							   </span>
+              </div>
 						</div>
 					</div>
 				</div>
@@ -38,4 +66,10 @@
 )->label(false);	
 ?>			
 
+</div>
+
+
+
+<div class="alert alert-danger" id="meserv4" role="alert">
+  <h3>Debes selecionar una empleado que haga tu servicio</h3>
 </div>

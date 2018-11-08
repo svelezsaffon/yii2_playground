@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Direccion */
 
-$this->title = 'Update Direccion: {nameAttribute}';
+$this->title = 'Actualizar Direccion';
 $this->params['breadcrumbs'][] = ['label' => 'Direccions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

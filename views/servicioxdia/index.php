@@ -2,38 +2,15 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\ServicioxdiaSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = 'Servicioxdias';
+$this->title = 'Servicio por dias';
 $this->params['breadcrumbs'][] = $this->title;
+
+if(Yii::$app->user->can('admin')){
+	echo Yii::$app->controller->renderPartial('index_admin', ['searchModel' => $searchModel,'dataProvider' => $dataProvider]);
+}else{
+	echo Yii::$app->controller->renderPartial('index_guest',['servicios'=>$servicios]);
+}
+
 ?>
-<div class="servicioxdia-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Servicioxdia', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'user',
-            'direccion',
-            'servicio',
-            'trabajador',
-            //'tiempo',
-            //'fecha_inicia',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-</div>

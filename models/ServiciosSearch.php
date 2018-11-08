@@ -13,18 +13,18 @@ use app\models\Servicios;
 class ServiciosSearch extends Servicios
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['nombre', 'descripcion'], 'safe'],
+            [['nombre', 'descripcion', 'image', 'icon'], 'safe'],
             [['id'], 'integer'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -63,7 +63,9 @@ class ServiciosSearch extends Servicios
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
+            ->andFilterWhere(['like', 'descripcion', $this->descripcion])
+            ->andFilterWhere(['like', 'image', $this->image])
+            ->andFilterWhere(['like', 'icon', $this->icon]);
 
         return $dataProvider;
     }

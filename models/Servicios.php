@@ -10,13 +10,17 @@ use Yii;
  * @property string $nombre
  * @property string $descripcion
  * @property int $id
+ * @property string $image
+ * @property string $icon
  *
+ * @property Plane[] $planes
+ * @property Servicioxdia[] $servicioxdias
  * @property Servicioxtrabajador[] $servicioxtrabajadors
  */
 class Servicios extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -24,19 +28,19 @@ class Servicios extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['nombre', 'descripcion'], 'required'],
             [['descripcion'], 'string'],
-            [['nombre'], 'string', 'max' => 100],
+            [['nombre', 'image', 'icon'], 'string', 'max' => 100],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -44,7 +48,25 @@ class Servicios extends \yii\db\ActiveRecord
             'nombre' => 'Nombre',
             'descripcion' => 'Descripcion',
             'id' => 'ID',
+            'image' => 'Image',
+            'icon' => 'Icon',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPlanes()
+    {
+        return $this->hasMany(Plane::className(), ['servicio' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicioxdias()
+    {
+        return $this->hasMany(Servicioxdia::className(), ['servicio' => 'id']);
     }
 
     /**

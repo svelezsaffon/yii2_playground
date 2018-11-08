@@ -38,4 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+
+    <?= Html::a('¿Quieres Pagar este servicio de una vez?', ['/pago/creates','id'=>$model->id], ['class'=>'btn btn-primary']) ?>
+
+
 </div>
