@@ -61,12 +61,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             </a>
 
                         </div>
+                        
                         <div class="col-md-3">
+                            
                             <a href=<?= Url::toRoute(['/direccion/update','id'=>$dir->id]);?> > <i class="fa yeti fa-edit fa-2x"></i>
                                 <div class="row yeti">Editar</div>
                             </a>
 
                         </div>
+
                     </div>
 
                 </div>

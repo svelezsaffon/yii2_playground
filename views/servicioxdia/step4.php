@@ -1,3 +1,10 @@
+<?php
+
+use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
+
+?>
+
 <div class="container">
 
 <script>
@@ -26,6 +33,7 @@ function myFunction4() {
 </script>
 
 <?php	
+
 	$dires=array();
 	$index=0;
 	foreach ($trabajadores as $servicioe){
@@ -48,11 +56,11 @@ function myFunction4() {
 					<div class="container">
   						<div class="row">			
 							<div class="col col-lg-10">								   
-								'.$label->nombre.' '.$label->apellido.'
+								'.$label['nombre'].' '.$label['apellido'].'
     						</div>
     						<div class="col col-lg-2">    	
                   <span class="badge">
-    						    '.\yii\bootstrap\Html::radio($name, $checked,['value' => $label->id,'onclick'=>"myFunction4()",'label' => 'Seleccionar',]).'
+    						    '.\yii\bootstrap\Html::radio($name, $checked,['value' => $label['id'],'onclick'=>"myFunction4()",'label' => 'Seleccionar',]).'
 							   </span>
               </div>
 						</div>

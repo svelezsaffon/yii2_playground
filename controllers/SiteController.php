@@ -119,6 +119,16 @@ class SiteController extends Controller
         ]);
     }
 
+/**
+     * Logout action.
+     *
+     * @return Response
+     */
+    public function actionLegal()
+    {
+        return $this->render('legal');
+    }    
+
     /**
      * Logout action.
      *

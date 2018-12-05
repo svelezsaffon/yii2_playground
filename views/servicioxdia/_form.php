@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use dosamigos\datepicker\DatePicker;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 ?>
 
 <div class="plane-form">
@@ -26,7 +27,7 @@ if(sizeof($direccionesModel) == 0){
             <div class="alert alert-danger" role="alert">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Para configurar un servicio, debes tener primero una direccion a dodne se va a realizar tu servicio</h2>
+                        <h2>Para configurar un servicio, debes tener primero una direccion a donde se va a realizar tu servicio</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -40,6 +41,14 @@ if(sizeof($direccionesModel) == 0){
 
 }else{
 
+/*
+Podemos poner u boton ue pregunte, quieres escoger tu el empleado que te atendera o quieres que nosotros lo escojamos por ti?
+
+Ahi tenemos un action(Boton) que trigue un requets de javascript al endpoint de los trabajadores!
+
+Podemos hacer el action con un javascript bien simple
+
+*/
 
 $this->registerJs("$('i[title=\"nombre\"]').tooltip()");
 
@@ -87,24 +96,6 @@ $wizard_config = [
             'title' => 'Direccion',
             'icon' => 'glyphicon glyphicon-road',
             'content' => Yii::$app->controller->renderPartial('step3', ['model' => $model,'form'=>$form,'direcciones'=>$direccionesModel]),
-            'skippable' => false,
-            'buttons' => [
-                'next' => [
-                    'title' => 'Siguiente', 
-                    'options' => [
-                        'class' => 'btn btn-primary',
-                        'id' =>'nextstep3',
-                        'disabled'=>true,
-                        'data-toggle'=>"tooltip",
-                        'title'=>"Debes selecionar una direccion!",
-                    ],
-                 ],
-             ],
-        ],
-        4 => [
-            'title' => 'Trabajador',
-            'icon' => 'glyphicon glyphicon-user',
-            'content' =>  Yii::$app->controller->renderPartial('step4', ['model' => $model,'form'=>$form,'trabajadores'=>$trabajadorModel]),
             'buttons' => [  
                     'save' => [
                     'html' => Html::submitButton(
@@ -113,19 +104,16 @@ $wizard_config = [
                             'class' => 'btn btn-primary',
                             'id' => 'finalstepsave',
                             'name' => 'step',
-                            'disabled'=>true,
                             'value' => 'save-final',
 
                         ]
                     ),
                 ],               
-
              ],
-        ],        
-
+        ],
 
     ],
-    'start_step' => isset($step)?$step:1,//$step > 0 ?$step:1,    
+    'start_step' => isset($step)?$step:1,
     
 ];
 echo \drsdre\wizardwidget\WizardWidget::widget($wizard_config);

@@ -40,6 +40,9 @@ function myFunction3() {
 	<h3 class="text-center">Seleciona la direccion donde el servicio sera realizado</h3>
 
 	<?php	
+
+  
+
 	$dires=array();
 	$index=0;
 	foreach ($direcciones as $servicioe){

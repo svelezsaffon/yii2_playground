@@ -17,11 +17,12 @@ use Yii;
  * @property string $descripcion
  * @property string $extratransferencia
  * @property int $metodo
+ * @property int $verificado
  *
- * @property ConveniosPago $metodo0
  * @property User $user0
  * @property Servicioxdia $servicioxdia0
  * @property Plane $plan0
+ * @property ConveniosPago $metodo0
  */
 class Pago extends \yii\db\ActiveRecord
 {
@@ -39,15 +40,15 @@ class Pago extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fecha_pago', 'user', 'plandia', 'monto', 'metodo'], 'required'],
+            [['fecha_pago', 'user', 'plandia', 'metodo'], 'required'],
             [['fecha_pago', 'plandia'], 'safe'],
-            [['user', 'servicioxdia', 'plan', 'metodo'], 'integer'],
+            [['user', 'servicioxdia', 'plan', 'metodo', 'verificado'], 'integer'],
             [['monto'], 'number'],
             [['descripcion', 'extratransferencia'], 'string'],
-            [['metodo'], 'exist', 'skipOnError' => true, 'targetClass' => ConveniosPago::className(), 'targetAttribute' => ['metodo' => 'id']],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
             [['servicioxdia'], 'exist', 'skipOnError' => true, 'targetClass' => Servicioxdia::className(), 'targetAttribute' => ['servicioxdia' => 'id']],
             [['plan'], 'exist', 'skipOnError' => true, 'targetClass' => Plane::className(), 'targetAttribute' => ['plan' => 'id']],
+            [['metodo'], 'exist', 'skipOnError' => true, 'targetClass' => ConveniosPago::className(), 'targetAttribute' => ['metodo' => 'id']],
         ];
     }
 
@@ -67,15 +68,8 @@ class Pago extends \yii\db\ActiveRecord
             'descripcion' => 'Descripcion',
             'extratransferencia' => 'Extratransferencia',
             'metodo' => 'Metodo',
+            'verificado' => 'Verificado',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMetodo0()
-    {
-        return $this->hasOne(ConveniosPago::className(), ['id' => 'metodo']);
     }
 
     /**
@@ -100,5 +94,13 @@ class Pago extends \yii\db\ActiveRecord
     public function getPlan0()
     {
         return $this->hasOne(Plane::className(), ['id' => 'plan']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMetodo0()
+    {
+        return $this->hasOne(ConveniosPago::className(), ['id' => 'metodo']);
     }
 }

@@ -18,7 +18,7 @@ class PagoSearch extends Pago
     public function rules()
     {
         return [
-            [['id', 'user', 'servicioxdia', 'plan', 'metodo'], 'integer'],
+            [['id', 'user', 'servicioxdia', 'plan', 'metodo', 'verificado'], 'integer'],
             [['fecha_pago', 'plandia', 'descripcion', 'extratransferencia'], 'safe'],
             [['monto'], 'number'],
         ];
@@ -68,6 +68,7 @@ class PagoSearch extends Pago
             'plandia' => $this->plandia,
             'monto' => $this->monto,
             'metodo' => $this->metodo,
+            'verificado' => $this->verificado,
         ]);
 
         $query->andFilterWhere(['like', 'descripcion', $this->descripcion])

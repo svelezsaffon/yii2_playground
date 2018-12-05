@@ -84,40 +84,25 @@ $wizard_config = [
             'icon' => 'glyphicon glyphicon-road',
             'content' => Yii::$app->controller->renderPartial('step3', ['model' => $model,'form'=>$form,'direcciones'=>$direccionesModel]),
             'skippable' => false,
-            'buttons' => [
-                'next' => [
-                    'title' => 'Siguiente', 
-                    'options' => [
-                        'class' => 'btn btn-primary',
-                        'id' =>'nextstep3',
-                        'disabled'=>true,
-                        'data-toggle'=>"tooltip",
-                        'title'=>"Debes selecionar una direccion!",                        
-                    ],
-                 ],
-             ],
-        ],
-        4 => [
-            'title' => 'Trabajador',
-            'icon' => 'glyphicon glyphicon-user',
-            'content' =>  Yii::$app->controller->renderPartial('step4', ['model' => $model,'form'=>$form,'trabajadores'=>$trabajadorModel]),
             'buttons' => [  
                     'save' => [
                     'html' => Html::submitButton(
                         Yii::t('app', 'Guardar'),
                         [
                             'class' => 'btn btn-primary',
-                            'id' => 'finalstepsave',
+                            'id' => 'nextstep3',
                             'name' => 'step',
                             'disabled'=>true,
                             'value' => 'save-final',
-
+                            'data-toggle'=>"tooltip",
+                            'title'=>"Debes selecionar una direccion!"
                         ]
                     ),
                 ],               
 
              ],
-        ],        
+        ],
+      
 
     ],
     'start_step' =>1,    

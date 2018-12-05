@@ -37,7 +37,7 @@ function myFunction1() {
           $index=$index+1;
         }
 
-        echo $form->field($model, 'servicio')->radioList(
+      echo $form->field($model, 'servicio',['options' => ['id' => 'av_servicio']])->radioList(
       $dires  ,
     ['item' => function ($index, $label, $name, $checked, $value) {
         return
@@ -54,7 +54,7 @@ function myFunction1() {
             <hr>
             <div>
               <span class="badge">
-                        '.\yii\bootstrap\Html::radio($name, $checked,['value' => $label->id,'name'=>'xdserv','onclick'=>"myFunction1()",'label' => 'Seleccionar',]).',
+                        '.\yii\bootstrap\Html::radio($name, $checked,['value' => $label->id, 'name'=>'xdserv','onclick'=>"myFunction1()",'label' => 'Seleccionar',]).',
               </span>
             </div>
         </div>

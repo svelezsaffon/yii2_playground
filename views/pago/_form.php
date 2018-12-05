@@ -29,6 +29,8 @@ use bookin\aws\checkbox\AwesomeCheckbox;
       $index=$index+1;
     }
 
+    Yii::$app->formatter->locale = 'COP';
+
     echo $form->field($model, 'metodo')->radioList(
       $dires  ,
       ['item' => function ($index, $label, $name, $checked, $value) {
@@ -36,9 +38,9 @@ use bookin\aws\checkbox\AwesomeCheckbox;
         '
        <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img class="media-object" src="/basic/web/img/'.$label->image.'">
+      <img class="media-object" src="/web/img/'.$label->image.'">
         <div class="caption">
-            <h3 class="text-center">'.$label->nombre.'</h3>        
+            <h3 class="text-center"> '.Yii::$app->formatter->asCurrency($label->valor, 'COP').'</h3>        
             <ul class="list-group">
                 <li class="list-group-item">Cuenta de ahorros</li>
                 <li class="list-group-item">#379-47654-25</li>
@@ -46,7 +48,7 @@ use bookin\aws\checkbox\AwesomeCheckbox;
         </div>
 
         <h3 class="text-center">Puedes utilizar un QR</h3>        
-        <img class="media-object" src="/basic/web/img/qrservicios.jpeg">
+        <img class="media-object" src="/web/img/qrservicios.jpeg">
 
         <div class="text-center">
             '.\yii\bootstrap\Html::radio($name, $checked,['value' => $label->id,'label' => 'Seleccionar',]).',
@@ -59,7 +61,7 @@ use bookin\aws\checkbox\AwesomeCheckbox;
             <i class="fab fa-whatsapp"></i> comunicate por whatsapp - click aqui
         </a>    
     </div>
-
+    
 </div> 
 
 

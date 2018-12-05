@@ -34,7 +34,7 @@ $events = array();
 
                 $counter=0;
                 foreach($servicios as $servicio){
-                    //Testing
+                    
                     $Event = new \yii2fullcalendar\models\Event();
                     $Event->id = $counter;
                     $Event->title = $servicio['servicio']." - ".$servicio['direccion'];
@@ -63,9 +63,15 @@ $events = array();
                                 
                             </div>
                             <div class="col-md-3">
-                                <a href=<?= Url::toRoute(['/servicioxdia/update','id'=>$servicio['id']])?> > <i class="fa yeti fa-edit fa-2x"></i>
-                                    <div class="row yeti">Editar</div>
-                                </a>
+                                <?php if($servicio['verificado']){?>
+                                    <a href=<?= Url::toRoute(['/servicioxdia/update','id'=>$servicio['id']])?> > <i class="fa yeti fa-edit fa-2x"></i>
+                                        <div class="row yeti">Editar</div>
+                                    </a>
+                                <?php }else{ ?>
+                                    <a href=<?= Url::toRoute(['/pago/update','id'=>$servicio['id']])?> > <i class="fas fa-dollar-sign fa-2x red-yeti"></i>
+                                        <div class="row red-yeti">Pagar</div>
+                                    </a>
+                                <?php } ?>
 
                             </div>
                         </div>

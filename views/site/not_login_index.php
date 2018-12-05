@@ -4,7 +4,17 @@ use app\models\SignupForm;
 
 <!DOCTYPE html>
 
+<script>
+var words=['Rapido','Facil','Legal','Seguro'];
+var pos=0;
 
+window.setInterval(() => {
+    var text=document.getElementById('txt_advice');
+    text.innerHTML=words[pos%words.length];
+    pos++;
+}, 1000);
+
+</script>
 
 <html lang="en">
 
@@ -16,18 +26,18 @@ use app\models\SignupForm;
 
     <!-- Header -->
 
+
     <section id="register">
         <div class="container">   
         <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Servicios</h2>
-                    <h3 class="section-subheading text-muted">
-                        Estos son los servicios que tenemos a dispocion (Estamos trabajando para añadir mas!)
-                    </h3>
+                    <h1> Contratar con nosotros es</h1> <h1 class="tlt yeti" id="txt_advice">Seguro</h1>
+                    
                 </div>
-            </div>         
+            </div>    
+            <div class="top-buffer"></div>                 
 
-            <div class="row">
+            <div class="row top-buffer">
 
                 <div class="col-lg-7 text-left">
                     <!--<img class="img-responsive text-left" src="img/logo.jpg" alt="">-->
@@ -157,7 +167,7 @@ use app\models\SignupForm;
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Servicios</h2>
                     <h3 class="section-subheading text-muted">
-                        Estos son los servicios que tenemos a dispocion (Estamos trabajando para añadir mas!)
+                        Estos son los servicios que tenemos a disposición (Estamos trabajando para añadir mas!)
                     </h3>
                 </div>
             </div>

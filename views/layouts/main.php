@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -38,6 +39,7 @@ AppAsset::register($this);
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
 
 
@@ -56,11 +58,22 @@ AppAsset::register($this);
     margin-bottom: 0;
 }
 
+.center-justified {
+  text-align: justify;
+  margin: 0 auto;  
+}
+
 .top-buffer { margin-top:20px; }
+.top-buffer-60 { margin-top:100px; }
 .top-buffer-null { margin-top:0px; }
 .yeti{color: #1e90ff;}
+.red-yeti{color: #FF3333;}
 .left-buffer {
     margin-left: 1px;
+}
+
+.my-navbar {
+    background-color: #1e90ff;
 }
 
 </style>
@@ -94,6 +107,8 @@ AppAsset::register($this);
             ['label' => 'Direcciones','icon'=> 'road', 'url' => ['/direccion']],
             ['label' => 'Servicios x dia', 'url' => ['/servicioxdia']],
             ['label' => 'Planes', 'url' => ['/plane']],
+            ['label' => 'Pagos', 'url' => ['/pago']],
+            ['label' => 'Servicos x empleado', 'url' => ['/trabajadordesem']],
 
             (
                 '<li>'
@@ -111,8 +126,9 @@ AppAsset::register($this);
 
         $items=[
             ['label' => 'Mis direcciones','icon'=> 'road', 'url' => ['/direccion']],
-            ['label' => 'Mis servicios por dia', 'url' => ['/servicioxdia']],
-            ['label' => 'Mis planes', 'url' => ['/plane']],
+            ['label' => 'Mis servicios por dia', 'url' => ['/servicioxdia']],                        
+            ['label' => 'Mis Planes', 'url' => ['/plane']],                        
+            ['label' => 'Mis pagos', 'url' => ['/pago']],
 
             (
                 '<li>'
@@ -147,7 +163,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-
+        <?= Html::a(' Terminos y condiciones', ['site/legal'], ['value'=>Url::to('index.php?r=site/legal'),'id'=>'modalButton','class'=>'yeti']) ?>
     </div>
 </footer>
 

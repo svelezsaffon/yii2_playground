@@ -39,6 +39,11 @@ class TrabajadorController extends Controller
         ];
     }
 
+
+    public function actionAnalyze($id){
+        return "svs";
+    }
+
     /**
      * Lists all Trabajador models.
      * @return mixed

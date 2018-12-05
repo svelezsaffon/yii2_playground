@@ -12,6 +12,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use app\models\Servicioxtrabajador;
 /**
  * PlaneController implements the CRUD actions for Plane model.
  */
@@ -109,6 +110,8 @@ class PlaneController extends Controller
             'sabado'=>$model->sabado,
             'domingo'=>$model->domingo,
             'direccion'=>$dir->direccion,
+            'desc'=>$serv->descripcion,
+            'icon'=>$serv->icon, 
             );
 
         return $this->render('view', [
@@ -126,9 +129,11 @@ class PlaneController extends Controller
         $model = new Plane();
         $model->user=Yii::$app->user->id;   
         $model->fecha_creacion=date("Y-m-d");
+        $model->trabajador=6;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            
+            return $this->redirect(['selecttra', 'id' => $model->id]);
         }
 
 
@@ -140,6 +145,36 @@ class PlaneController extends Controller
             'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
             ]);
 
+    } 
+
+    public function actionSelecttra($id)
+    {
+
+
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+
+          if($model->save(false)){
+            $asing=new Servicioxtrabajador();
+            $asing->trabajador=intval($model->trabajador);
+            $asing->servicio=intval($model->id);
+            $asing->tipo='p';
+            $asing->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+          }
+            
+        }
+        
+       
+        
+        $query="SELECT trabajador.nombre as nombre, trabajador.cedula as cedula,trabajador.telefono as telefono,trabajador.apellido as apellido, trabajador.id as id FROM trabajador,trabajadordesem WHERE trabajador.id NOT IN(SELECT plane.trabajador FROM plane,pago WHERE plane.id=pago.servicioxdia and verificado=1 AND plane.fecha_inicia='".$model->fecha_inicia."') AND trabajador.id=trabajadordesem.trabajador AND trabajadordesem.servicio=".$model->servicio;
+
+            $trabajadorModel = Yii::$app->db->createCommand($query)->queryAll();
+
+        return $this->render('uptra', [
+            'model' => $model,'trabajadorModel'=>$trabajadorModel,
+            ]);
     }
 
     /**
