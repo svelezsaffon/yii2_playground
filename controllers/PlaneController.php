@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Plane;
+use app\models\Pago;
 use app\models\Servicios;
 use app\models\Direccion;
 use app\models\Trabajador;
@@ -13,6 +14,10 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\Servicioxtrabajador;
+use app\models\UserInfo; 
+use app\models\Cuentaverificada;
+use yii\helpers\Url;
+use app\models\Costos;
 /**
  * PlaneController implements the CRUD actions for Plane model.
  */
@@ -26,7 +31,7 @@ class PlaneController extends Controller
         return [
         'access'=>[
         'class'=>AccessControl::className(),
-        'only'=>['create','update','index','delete','view'],
+        'only'=>['create','update','index','delete','view','getempleados'],
         'rules'=>[
         [
         'allow'=>true,
@@ -59,8 +64,7 @@ class PlaneController extends Controller
 
             return $this->render('index', [
                 'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-                
+                'dataProvider' => $dataProvider,                
                 ]);
 
         }else{
@@ -68,15 +72,134 @@ class PlaneController extends Controller
 
             $searchModel = new PlaneSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            
+            $userinfo= UserInfo::find()->where(['user'=>Yii::$app->user->id])->one();
+            $cuentaver= Cuentaverificada::find()->where(['user'=>Yii::$app->user->id])->one(); 
+            $servername=Url::to(['cuentaverificada/verify', 'hash' => $cuentaver->hash]);   
+
+            $verificar=false;
+            if($userinfo==NULL){
+                $verificar=false;
+            }else{
+                $verificar=$cuentaver->verificada==0 ? false:true;
+            }
 
             $dir = Yii::$app->db->createCommand('SELECT plane.id, direccion.direccion as dir, direccion.nombre as dir_nombre, plane.fecha_inicia as fecha,plane.timepo as tiempo ,servicios.image as img, servicios.nombre as nombre,servicios.icon as icon FROM plane, servicios,direccion WHERE plane.user = '.Yii::$app->user->id.' and servicio= servicios.id and plane.direccion=direccion.id')->queryAll();
 
             return $this->render('index', [
                 'planes'=>$dir,
+                'cuentaver'=>$verificar,                
+                'linkcuenta'=>$servername                
                 ]);
 
         }
     }
+
+    public function Generarpagos($plan){
+
+        echo date('w', strtotime("2019-02-03"));
+
+        $model=$this->findModel($plan); 
+
+        $fecha=null;
+            $days=[
+                1=>$model->lunes,
+                2=>$model->martes,
+                3=>$model->miercoles,
+                4=>$model->jueves,
+                5=>$model->viernes,
+                6=>$model->sabado,
+                0=>$model->domingo
+            ];
+
+        if($model->fecha_inicia > date("Y-m-d")){
+            $fecha =$model->fecha_inicia;
+
+        }else{
+
+            $out=false;
+
+            $fecha=date("Y-m-d");            
+            
+            while($out==false){
+
+                $weekday= date('w', strtotime($fecha));
+
+                if($days[$weekday]==1){
+                    $out=true;
+
+                }else{
+                    $fecha = date('Y-m-d', strtotime($fecha . ' +1 day'));        
+                }                
+            }
+
+        }
+
+        $create=35;
+
+        $direccion=Direccion::find()->where(['id'=>$model->direccion])->one();
+
+        $costo=Costos::find()->where(['servicio' => $model->servicio,'horario'=>$model->timepo, 'ciudad'=>$direccion->ciudad])->one();
+
+        while ($create > 0) {
+            
+            $weekday= date('w', strtotime($fecha));
+
+            if($days[$weekday]==1){
+                $pago = new Pago();
+                    $pago->plan=$model->id;
+                    $pago->user=Yii::$app->user->id;  
+                    $pago->monto=$costo->valor;
+                    $pago->plandia=$fecha;
+                    $pago->fecha_pago=date("Y-m-d");
+                $pago->save();             
+                $create--;    
+            }
+
+            $fecha = date('Y-m-d', strtotime($fecha . ' +1 day'));        
+            
+        }
+
+        
+
+
+    }
+
+
+    public function actionGetempleados($servicio,$fecha){
+        $query="SELECT trabajador.nombre as nombre, trabajador.cedula as cedula,trabajador.telefono as telefono,trabajador.apellido as apellido, trabajador.id as idt FROM trabajador,trabajadordesem WHERE trabajador.id NOT IN(SELECT servicioxdia.trabajador FROM servicioxdia,pago WHERE servicioxdia.id=pago.servicioxdia and verificado=1 AND servicioxdia.fecha_inicia='".$fecha."') AND trabajador.id=trabajadordesem.trabajador AND trabajadordesem.servicio=".$servicio;
+
+            $trabajadorModel = Yii::$app->db->createCommand($query)->queryAll();
+
+        $index=0;
+        foreach ($trabajadorModel as $trabajador) {
+            echo '          <div class="row">
+                <div class="col">
+            <div class="panel panel-default">               
+                <div class="panel-heading">
+                    Empledo estrella #'.$index.'
+                </div>              
+                <div class="panel-body">        
+                    <div class="container">
+                        <div class="row">           
+                            <div class="col col-lg-10">                                
+                                '.$trabajador['nombre'].' '.$trabajador['apellido'].'
+                            </div>
+                            <div class="col col-lg-2">      
+                  <span class="badge">
+                                '.\yii\bootstrap\Html::radio("Plane[trabajador]", false,['value' => $trabajador['idt'],'onclick'=>"myFunction4()",'label' => 'Seleccionar',]).'
+                               </span>
+              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+            </div>
+        </div>  ';
+            $index++;
+        }  
+
+    }       
 
     /**
      * Displays a single Plane model.
@@ -91,6 +214,7 @@ class PlaneController extends Controller
         $dir= Direccion::find()->where(['id' => $model->direccion])->one();
         $serv= Servicios::find()->where(['id' => $model->servicio])->one();
         $trab= Trabajador::find()->where(['id' => $model->trabajador])->one();
+        $pago= Pago::find()->where(['plan' => $model->id,'user' => Yii::$app->user->id ])->andWhere(['>', 'plandia', date("Y-m-d")])->one();
 
         $obj = (object) array(
             'id'=>$model->id,
@@ -111,7 +235,10 @@ class PlaneController extends Controller
             'domingo'=>$model->domingo,
             'direccion'=>$dir->direccion,
             'desc'=>$serv->descripcion,
-            'icon'=>$serv->icon, 
+            'icon'=>$serv->icon,
+            'pago_id'=>$pago->id, 
+            'pago_monto'=>$pago->monto,
+            'pago_fecha'=>$pago->plandia,
             );
 
         return $this->render('view', [
@@ -129,53 +256,31 @@ class PlaneController extends Controller
         $model = new Plane();
         $model->user=Yii::$app->user->id;   
         $model->fecha_creacion=date("Y-m-d");
-        $model->trabajador=6;
+        
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-            return $this->redirect(['selecttra', 'id' => $model->id]);
+            $asing=new Servicioxtrabajador();
+            $asing->trabajador=intval($model->trabajador);
+            $asing->servicio=intval($model->id);
+            $asing->tipo='p';
+            $asing->save();
+
+            $this->Generarpagos($model->id);
+
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
 
         $servicioModel = Servicios::find()->all();
         $direccionesModel = Direccion::find()->where(['user' => $model->user])->all();
         $trabajadorModel = Trabajador::find()->all();
+        $userinfo= UserInfo::find()->where(['user'=>Yii::$app->user->id])->one();
 
         return $this->render('create', [
-            'model' => $model, 'allServicios'=>$servicioModel,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
+            'model' => $model, 'allServicios'=>$servicioModel,'userinfo'=>$userinfo,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
             ]);
 
     } 
-
-    public function actionSelecttra($id)
-    {
-
-
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) ) {
-
-          if($model->save(false)){
-            $asing=new Servicioxtrabajador();
-            $asing->trabajador=intval($model->trabajador);
-            $asing->servicio=intval($model->id);
-            $asing->tipo='p';
-            $asing->save();
-            return $this->redirect(['view', 'id' => $model->id]);
-          }
-            
-        }
-        
-       
-        
-        $query="SELECT trabajador.nombre as nombre, trabajador.cedula as cedula,trabajador.telefono as telefono,trabajador.apellido as apellido, trabajador.id as id FROM trabajador,trabajadordesem WHERE trabajador.id NOT IN(SELECT plane.trabajador FROM plane,pago WHERE plane.id=pago.servicioxdia and verificado=1 AND plane.fecha_inicia='".$model->fecha_inicia."') AND trabajador.id=trabajadordesem.trabajador AND trabajadordesem.servicio=".$model->servicio;
-
-            $trabajadorModel = Yii::$app->db->createCommand($query)->queryAll();
-
-        return $this->render('uptra', [
-            'model' => $model,'trabajadorModel'=>$trabajadorModel,
-            ]);
-    }
 
     /**
      * Updates an existing Plane model.

@@ -1,0 +1,1 @@
+El trabajo ha sido rechazdo por el proveedor de servicios, pronto se comunicaran contigo

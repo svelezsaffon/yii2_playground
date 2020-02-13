@@ -9,31 +9,29 @@ use bookin\aws\checkbox\AwesomeCheckbox;
 <script>
 
   function myFunction2() {
-    var boxesEL=document.getElementsByName('Servicioxdia[tiempo]');    
+       
     
-    var found=false;
-    var fecha=false;
-    for(var x=0; x < boxesEL.length; x++)   // comparison should be "<" not "<="
-    {   
-      found=found || boxesEL[x].checked;
-    }
+    var fecha=false;   
 
 
-    fecha= document.getElementById('servicioxdia-fecha_inicia').value!='';
+    fecha_val = document.getElementById('servicioxdia-fecha_inicia').value;
+    fecha=fecha_val != '';
 
-    if(found && fecha){
-      document.getElementById('meserv2').style.display="none";      
-      
-    }else if(!found && fecha){
-      document.getElementById('meserv2').innerHTML="<h2>Deber selecionar un horario!!</h2>";      
-    }else if(found && !fecha) {
+
+    if(fecha){
+      document.getElementById('meserv2').style.display="none";
+
+      update_pasos('text2q',"Fecha: "+fecha_val);      
+    
+    }else if(!fecha) {
       document.getElementById('meserv2').innerHTML="<h3>Deber selecionar la fecha que comienza tu servicio!!</h3>";      
     }
-
-    found=found && fecha;
-    document.getElementById('nextstep2').disabled=!found;
+    
+    document.getElementById('nextstep2').disabled=!fecha;
   }
 </script>
+
+
 
 <div class="row">
 
@@ -53,7 +51,8 @@ use bookin\aws\checkbox\AwesomeCheckbox;
         'clientOptions' => [          
         'autoclose' => true,
         'startDate' => date('Y-m-d', time()+86400),
-        'format' => 'yyyy-mm-dd',          
+        'format' => 'yyyy-mm-dd',  
+        'todayBtn' => true,        
         ],
 
         ]
@@ -70,42 +69,27 @@ use bookin\aws\checkbox\AwesomeCheckbox;
     </div>
 
     <div class="row">
-              <?php 
+      
+      <?php 
+        if(isset($horarios)){
+            echo $form->field($model, 'tiempo')->dropDownList($horarios); 
+        }else{
+            echo $form->field($model, 'tiempo')->dropDownList([]);       
+        }        
 
-        echo $form->field($model, 'tiempo')->radioList(
-          ['4am'=>"4 Horas - 8:00am a 12:00pm",'4pm'=>"4 Horas - 1:30pm a 5:30pm",'8ful'=>"8 Horas - 8:00am a 5:00pm"]      ,
-          ['item' => function ($index, $label, $name, $checked, $value) {
-            return 
-            '
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <div class="col-lg-8">'.$label.'</div>
-                  <div class="col-lg-4">
-                    <span class="badge">
-                        '.\yii\bootstrap\Html::radio($name, $checked,['value' => $value,'onclick'=>"myFunction2()",'name'=>'xdhora','label' => 'Seleccionar',]).'
-                    </span>
-                  </div>    
-                </div>
-              </div>      
-              '; 
-            }]
-            )->label(false);
+      ?>
 
-            ?>
     </div>
 
   </div>
 
 
-
-
 </div>
-
-
 
 <div class="alert alert-danger row" id="meserv2" role="alert">
   <h3>Debes seleccionar una fecha y un horario</h3>
 </div>
+
 
 
 

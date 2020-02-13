@@ -1,11 +1,12 @@
-<?php 
+    <?php 
 use app\models\SignupForm;
+use yii\helpers\Html;
 ?>
 
 <!DOCTYPE html>
 
 <script>
-var words=['Rapido','Facil','Legal','Seguro'];
+var words=['Rápido','Fácil','Legal','Seguro'];
 var pos=0;
 
 window.setInterval(() => {
@@ -16,343 +17,418 @@ window.setInterval(() => {
 
 </script>
 
-<html lang="en">
+<style type="text/css">
+img.resize {
+  max-width:50%;
+  max-height:50%;
+}
+
+.panel-default > .panel-heading-custom {
+background: #ff0000; color: #fff; }
 
 
-<body id="page-top" class="index">
+.row{
+    overflow: hidden; 
+}
+.well_bg {
+    background: rgb(22, 105, 173);
+}
 
-    <!-- Navigation -->
+[class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+@media (min-width: 992px) {
+   .equal{  
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+    }
+}
+
+.panel {
+    width: 100%;
+    height: 100%;
+}
 
 
-    <!-- Header -->
+.fixed-panel {  
+  height: 30vh; 
+}
 
+.container-full {
+  margin: 0 auto;
+  width: 100%;
+}
 
-    <section id="register">
-        <div class="container">   
-        <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h1> Contratar con nosotros es</h1> <h1 class="tlt yeti" id="txt_advice">Seguro</h1>
-                    
-                </div>
-            </div>    
-            <div class="top-buffer"></div>                 
+.center{
+    vertical-align:center
+}
 
-            <div class="row top-buffer">
+section.groove {border-style: groove;}
 
-                <div class="col-lg-7 text-left">
-                    <!--<img class="img-responsive text-left" src="img/logo.jpg" alt="">-->
-                    <br/>
+.small-text{
+    font-size: xx-small;
+}
+
+.border-left{
+padding-right:20px; 
+border-right: 1px;
+}
+
+.cliente {
+    margin-top:10px;
+    border: #cdcdcd medium solid;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.border-top-xx-small{   /* within paragraph */
+    margin-bottom: 0px;
+}
+
+.border-top-medium{   /* within paragraph */
+    margin-bottom: 50px;
+}
+
+.section-bg-grey{
+      background: #F8F8FF;
+} 
+
+img.resize-90 {
+  max-width:99.9%;
+}
+
+</style>
+  <div class="section-bg-grey border-top-medium">
+<div id="myCarousel" class="carousel m" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="img/servicios/banner-domestico.png" alt="Los Angeles">
+    </div>
+
+    <div class="item">
+      <img src="img/servicios/banner-domestico.png" alt="Los Angeles">
+    </div>
+
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>    
+
+  
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h3 class="section-heading"> <p class="grey-text" style="color:grey;">Conoce aquí</p> </h3>
+            <h2 class="section-subheading"> <p class="grey-text" style="color:grey;">¡Nuestros servicios destacados!</p></h2>
+        </div>
+    </div>
+    <div class="section-bg-grey border-top-medium">
+    <div class="row">
+        
+        <div class="col-md-2 col-lg-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
                     <div class="row">
-
                         <div class="col-lg-12">
-
-                            <div class="row">
-                                <div class="col-md-1">                            
-
-                                    <span class="fa-stack fa-2x" >        
-                                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>        
-                                        <i class="fa fa-gavel fa-stack-1x fa-inverse"></i>        
-                                    </span>
-                                </div>
-                                <div class="col-md-11">
-                                    <h4>
-                                        Ud está contratando un servicio con una persona que cumple con todos los requisitos legales de la legislación Colombiana.
-                                    </h4>
+                            <div class="media">
+                                <div class="media-body">
+                                    <img src="img/servicios/pintor.png" class="img-responsive center-block">
                                 </div>
                             </div>
-
-                        </div>                        
-                    </div>
-                    <br/>
-
-                    <div class="row">
-
-                        <div class="col-lg-12">
-                            <div class="row">
-                                <div class="col-md-1">                            
-
-                                    <span class="fa-stack fa-2x" >        
-                                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>        
-                                        <i class="fa fa-chess-knight fa-stack-1x fa-inverse"></i>        
-                                    </span>
-                                </div>
-                                <div class="col-md-11">
-                                    <h4>
-                                        Ud puede olvidarse de cualquier problema, o demanda laboral, ya que ud no es el empleador de la persona que le presta su servicio.
-                                    </h4>
-                                </div>
-                            </div>
-
-                        </div>                        
-                    </div>
-                    <br/>
-
-                    <div class="row">
-
-                        <div class="col-lg-12">
-                            <div class="row">
-                                <div class="col-md-1">                            
-
-                                    <span class="fa-stack fa-2x" >        
-                                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>        
-                                        <i class="fa fa-calendar-alt fa-stack-1x fa-inverse"></i>        
-                                    </span>
-                                </div>
-                                <div class="col-md-11">
-                                    <h4>
-                                        Ud contrata una persona , por el tiempo estrictamente necesario y ajustado a su presupuesto.
-                                    </h4>
-                                </div>
-                            </div>                        
-                        </div>                        
-                    </div>
-                    <br/>
-
-                    <div class="row">                        
-                        <div class="col-lg-12">
-
-                            <div class="row">
-                                <div class="col-md-1">                            
-
-                                    <span class="fa-stack fa-2x" >        
-                                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>        
-                                        <i class="fa fa-credit-card fa-stack-1x fa-inverse"></i>        
-                                    </span>
-                                </div>
-                                <div class="col-md-11">
-                                    <h4>
-                                        Ud debe pagar electrónicamente su servicio, de manera que no habrá manejo de efectivo
-                                    </h4>
-                                </div>
-                            </div>                                                      
-                        </div>                        
-                    </div>
-                    <br/>
-
-                </div>
-
-                <div class="col-lg-5 text-left">
-                    <div  class="panel panel-default">
-                        <div class="panel-body">
-                        <?php                     
-                            echo Yii::$app->controller->renderPartial('simple_login', ['model' => $login_model,]);
-                        ?>
                         </div>
                     </div>
-                    
-                    <div  class="panel panel-default">
-                        <div class="panel-body">
-                        <?php                     
-                            echo Yii::$app->controller->renderPartial('signup', ['model' => $model,]);
-                        ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
-
-            
-        </div>
-
-    </section>
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Servicios</h2>
-                    <h3 class="section-subheading text-muted">
-                        Estos son los servicios que tenemos a disposición (Estamos trabajando para añadir mas!)
-                    </h3>
-                </div>
-            </div>
-            <div class="row text-center">                
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>
-                        <i class="fa fa-home fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Domestico</h4>
-                    <p class="text-muted">
-                        Prestamos el servicio de aseo domestico, con esta contratacion te evitas todos las vueltas
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>
-                        <i class="fa fa-car fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Conductor</h4>
-                    <p class="text-muted">
-                        Puedes contratar conductores por dias, para que te ayuden conduciendo
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle yeti fa-stack-2x text-primary"></i>
-                        <i class="fa fa-motorcycle fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Mensajeria</h4>
-                    <p class="text-muted">
-                        Puedes contratar personas que hagan tus "vueltas"
-                    </p>
-                </div>
-            </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
-            
-
-        </div>
-    </section>
-
-
-    <!-- About Section -->
-    <section id="proceso">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">¿Como funciona?</h2>
-                    <h3 class="section-subheading text-muted">Aqui te explicamos como puedes contratar con nosotros</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="timeline">
-
-                        <li class="timeline-inverted">
-                            <div class="timeline-image yeti">
-                                <span class="fa-stack fa-5x">                                    
-                                    <i class="fa fa-book fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>Registrarse</h4>
-                                    <h4 class="subheading">Unirse a la comunidad</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lo primero que tienes que hacer es registrarte en la pagina. Esto significa que dees crear un usuario y una contraseña, asi puedes volver cada vez e ingresar para uscar nuevos servicios </p>
-                                </div>
-                            </div>
-                        </li>
-
-
-                        <li>
-                            <div class="timeline-image">
-                                <span class="fa-stack fa-5x">                                    
-                                    <i class="fa fa-calendar-alt fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>Dia o Plan</h4>
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="grey-text section-subheading">
                                     
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Puedes escoger si solo necesitas tu servicio un dia especifico, o puedes seleccionar que el servicio sea recurrente.</p>
-                                </div>
+                                <p class="border-top-xx-small small-text">servicio de</p>
+                                <p class="border-top-xx-small">Pintura</p>
+                                <p class="small-text">Unica vez o mensual</p>
+                                    
                             </div>
-                        </li>                        
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <span class="fa-stack fa-5x">                                    
-                                    <i class="fa fa-hands-helping fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>Servicio</h4>
-                                    <h4 class="subheading">Que tipo de servicio necesitas</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Ofrecemos gran variedad de servicios que te pueden ayudar con tu dia a dia</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
-                                <span class="fa-stack fa-5x">                                    
-                                    <i class="fa fa-cogs fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>Configuracion</h4>
-                                    <h4 class="subheading">Configura tu servicio a tus nececidades</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">La configuracion del servicio es la parte mas importante, debes decirnso que dia lo necesitas, en que direccion y puedes escoger de una gran lista de empleados quien relaizar tu servicio</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <span class="fa-stack fa-5x">                                    
-                                    <i class="fa fa-credit-card fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>El pago</h4>
-                                    <h4 class="subheading">Debes pagar por tu servicio</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Debes hacer el pago de tu servicio un dia antes de que este llegue, si no recibimos tu pago el dia antes, no veremos obligado a cancelar tu servicio. Claro que te llamaremos y haremos todo lo posible por recordarte</p>
-                                </div>
-                            </div>
-                        </li>                        
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <h4>
-                                    Listo!!
-                                    <br>Es asi 
-                                    <br>de facil
-                                </h4>
-                            </div>                            
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button type="button" class="center-block btn btn-info">Ver mas</button>
+                        </div>
+                    </div>                
                 </div>
             </div>
         </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Your Website 2016</span>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li><a href="#">Politica de privacidad</a>
-                        </li>
-                        <li><a href="#">Terminos de uso</a>
-                        </li>
-                    </ul>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="media">
+                                <div class="media-body">
+                                    <img src="img/servicios/limpieza.png" class="img-responsive center-block">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="grey-text section-subheading">
+                                    
+                                <p class="border-top-xx-small small-text">servicio de</p>
+                                <p class="border-top-xx-small">Pintura</p>
+                                <p class="small-text">Unica vez o mensual</p>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button type="button" class="center-block btn btn-info">Ver mas</button>
+                        </div>
+                    </div>                
                 </div>
             </div>
         </div>
-    </footer>
+
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="media">
+                                <div class="media-body">
+                                    <img src="img/servicios/lava.png" class="img-responsive center-block">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="grey-text section-subheading">
+                                    
+                                <p class="border-top-xx-small small-text">servicio de</p>
+                                <p class="border-top-xx-small">Pintura</p>
+                                <p class="small-text">Unica vez o mensual</p>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button type="button" class="center-block btn btn-info">Ver mas</button>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="media">
+                                <div class="media-body">
+                                    <img src="img/servicios/jardineria.png" class="img-responsive center-block">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="grey-text section-subheading">
+                                    
+                                <p class="border-top-xx-small small-text">servicio de</p>
+                                <p class="border-top-xx-small">Pintura</p>
+                                <p class="small-text">Unica vez o mensual</p>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button type="button" class="center-block btn btn-info">Ver mas</button>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+        </div>                
+
+        </div>
+    </div>
+    </div>
+
+<div class="border-top-medium">
+    <div class="row">
+        <div class="col-lg-4 ">
+                    <div class="media">
+                        <div class="media-body">
+                            <img src="img/promos/oferta1.png" class="media-object">
+                        </div>
+                    </div>             
+        </div>
+        <div class="col-lg-4">
+                    <div class="media">
+                        <div class="media-body">
+                            <img src="img/promos/oferta2.png" class="media-object">
+                        </div>
+                    </div>             
+        </div>
+        <div class="col-lg-4">
+                    <div class="media">
+                        <div class="media-body">
+                            <img src="img/promos/oferta3.png" class="media-object">
+                        </div>
+                    </div>             
+        </div>                
+    </div>
+
+</div>
+
+<div class="border-top-medium">
+<div class="section-bg-grey">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h4 class="grey-text" style="color:grey;">Contratar con nosotros es</h4>
+        </div>
+    </div>
+    <div class="row border-top-medium">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                <div class="col-md-3">
+                    <div class="media">
+                        <div class="media-body text-center">
+                            <h6 class="media-heading grey-text">Seguro</h6>
+                            <img src="img/iconos/seguro.png" class="media-object center-block">
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-md-3">
+                    <div class="media">
+                        <div class="media-body text-center">
+                            <h6 class="media-heading grey-text">Facil</h6>
+                            <img src="img/iconos/facil.png" class="media-object center-block">
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-md-3">
+                    <div class="media">
+                        <div class="media-body text-center">
+                            <h6 class="media-heading grey-text">Rapido</h6>
+                            <img src="img/iconos/rapido.png" class="media-object center-block">
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-md-3">
+                    <div class="media">
+                        <div class="media-body text-center">
+                            <h6 class="media-heading grey-text">Legal</h6>
+                            <img src="img/iconos/legal.png" class="media-object center-block">
+                        </div>
+                    </div>                    
+                </div>
+                </div>                                                
+            </div>
+        </div>
+    </div>
+    <div class="border-top-medium">
+    <div class="row border-top-medium">
+        <div class="col-lg-3 col-lg-offset-2">
+            <div class="alert alert-info">
+                <h3 class="panel-title">Persona Profesional</h3>
+                <div class="panel-body">
+                    Puedes contratar gente profesional por días, para que te ayuden con tus diligencias diarias
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="alert alert-warning">
+                <h3 class="panel-title">Tiempo Necesario</h3>
+                <div class="panel-body">
+                    Contratas una persona, por el tiempo estrictamente necesario y ajustado a tu presupuesto
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="alert alert-info">
+                <h3 class="panel-title">Paga en linea</h3>
+                <div class="panel-body">
+                    Puedes pagar electrónicamente tu servicio, de manera que no habrá manejo de efectivo
+                </div>
+            </div>
+        </div>                
+    </div>
+    </div>
+</div>
+</div>
+
+
+
+<div class="row">
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h3 class="section-heading"> <p class="grey-text" style="color:grey;">Aquí te explicamos como puedes contratar con nosotros</p> </h3>
+            <h1 class="section-subheading"> <p class="grey-text" style="color:grey;">¿Comó Funciona?</p></h1>
+        </div>
+    </div>
+
+    <div class="col-lg-6 text-center">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/15jClMArRK0?rel=0" allowfullscreen>                    
+            </iframe>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="list-group">
+            <a class="list-group-item">
+                <h5 class="list-group-item-heading">Registrate en la comunidad</h5>
+                <p class="list-group-item-text">Lo primero que tienes que hacer es registrarte en la pagina. Esto significa que debes crear un usuario y una contraseña, así puedes volver a ingresar para usar u ofrecer servicios</p>
+            </a>
+            <a class="list-group-item">
+                <h5 class="list-group-item-heading">Día o Plan</h5>
+                <p class="list-group-item-text">Puedes escoger si sólo necesitas tu servicio un día especifico, o puedes seleccionar que el servicio sea repetitivo.</p>
+            </a>
+            <a class="list-group-item">
+                <h6 class="list-group-item-heading">¿Qué tipo de servicio necesitas u ofreces?</h5>
+                <p class="list-group-item-text">Ofrecemos gran variedad de servicios que te pueden ayudar con tu día a día, o cuando ofreces servicios puedes encontrar clientes mas facil</p>
+            </a>
+            <a class="list-group-item">
+                <h5 class="list-group-item-heading">Configuración</h5>
+                <p class="list-group-item-text">La configuración del servicio es la parte mas importante, debes decirnos que día lo necesitas, en que dirección y puedes escoger de una gran lista de empleados quién realizara tu servicio</p>
+            </a>
+            <a class="list-group-item">
+                <h5 class="list-group-item-heading">Pago</h5>
+                <p class="list-group-item-text">Debes hacer el pago de tu servicio un día antes de que este llegue, si no recibimos tu pago el día antes, nos veremos obligados a cancelar tu servicio. Claro que te llamaremos y haremos todo lo posible por recordarte</p>
+            </a>                                                
+        </div>
+    </div>
+</div>
+
+
+   
+
+
 
 
         <!-- jQuery -->
@@ -371,6 +447,3 @@ window.setInterval(() => {
         <!-- Theme JavaScript -->
         <script src="js/agency.min.js"></script>
 
-    </body>
-
-    </html>

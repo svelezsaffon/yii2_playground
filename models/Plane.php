@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Pago;
 
 /**
  * This is the model class for table "plane".
@@ -89,6 +90,7 @@ class Plane extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Servicios::className(), ['id' => 'servicio']);
     }
+
 
     /**
      * @return \yii\db\ActiveQuery

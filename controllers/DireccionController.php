@@ -4,11 +4,15 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Direccion;
+use app\models\Ciudades;
 use app\models\DireccionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use app\models\Cuentaverificada;
+use app\models\UserInfo;
+use yii\helpers\Url;
 /**
  * DireccionController implements the CRUD actions for Direccion model.
  */
@@ -48,13 +52,37 @@ class DireccionController extends Controller
         $searchModel = new DireccionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere(['user'=>Yii::$app->user->id]); 
-
         $dir= Direccion::find()->where(['user'=>Yii::$app->user->id])->all() ;
+
+               $query = new yii\db\Query;
+
+         $query->select(['id'=>'direccion.id','direccion'=>'direccion.direccion','nombre'=>'direccion.nombre',
+                    'quien_recibe'=>'direccion.quien_recibe','ciudad'=>'ciudades.nombre','puntos_referencia'=>'direccion.puntos_referencia'])
+                ->from(['direccion','ciudades'])
+                ->andWhere('direccion.user=:iduser', [':iduser' => Yii::$app->user->id])
+                ->andWhere('ciudades.id = direccion.ciudad');
+                 
+
+        $command = $query->createCommand();
+        $dir=$command->queryAll();
+
+
+        $userinfo= UserInfo::find()->where(['user'=>Yii::$app->user->id])->one();
+            $cuentaver= Cuentaverificada::find()->where(['user'=>Yii::$app->user->id])->one(); 
+            $servername=Url::to(['cuentaverificada/verify', 'hash' => $cuentaver->hash]);   
+            $verificar=false;
+            if($userinfo==NULL){
+                $verificar=false;
+            }else{
+                $verificar=$cuentaver->verificada==0 ? false:true;
+            }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'direcciones' => $dir,
+            'cuentaver'=>$verificar,            
+            'linkcuenta'=>$servername            
         ]);
     }
 
@@ -66,9 +94,30 @@ class DireccionController extends Controller
      */
     public function actionView($id)
     {
+
+        $query = new yii\db\Query;
+
+         $query->select(['id'=>'direccion.id','direccion'=>'direccion.direccion','nombre'=>'direccion.nombre',
+                    'quien_recibe'=>'direccion.quien_recibe','ciudad'=>'ciudades.nombre','puntos_referencia'=>'direccion.puntos_referencia'])
+                ->from(['direccion','ciudades'])
+                ->where('direccion.id=:idp', [':idp' => $id])
+                ->andWhere('direccion.user=:iduser', [':iduser' => Yii::$app->user->id])
+                ->andWhere('ciudades.id = direccion.ciudad');
+                 
+
+        $command = $query->createCommand();
+        $provider=$command->queryOne();
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $provider,
         ]);
+    }
+
+    public function actionGetname($id){
+
+        $model=Direccion::find()->where(['id' => $id])->one();
+
+        return $model->direccion;
     }
 
     /**
@@ -90,8 +139,11 @@ class DireccionController extends Controller
             
         }
 
+        $direcciones= Ciudades::find()->where(['habilitada'=>1])->all();
+
         return $this->render('create', [
             'model' => $model,
+            'direcciones'=>$direcciones
         ]);
     }
 
@@ -114,8 +166,11 @@ class DireccionController extends Controller
             
         }
 
+        $direcciones= Ciudades::find()->where(['habilitada'=>1])->all();
+
         return $this->renderAjax('createmodal', [
             'model' => $model,
+            'direcciones'=>$direcciones
         ]);
     }
 
@@ -135,8 +190,12 @@ class DireccionController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
+
+        $direcciones= Ciudades::find()->where(['habilitada'=>1])->all();
+
+        return $this->render('create', [
             'model' => $model,
+            'direcciones'=>$direcciones
         ]);
     }
 

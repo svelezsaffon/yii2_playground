@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use app\models\Servicioxdia;
 use app\models\ConveniosPago;
 use yii\filters\AccessControl;
+use yii\data\SqlDataProvider;
 
 /**
  * PagoController implements the CRUD actions for Pago model.
@@ -50,30 +51,58 @@ class PagoController extends Controller
     {
         
         if(Yii::$app->user->can('admin')){
+
             $searchModel = new PagoSearch();
+            
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);        
 
-            return $this->render('index', [
+            $query='SELECT pago.id as pagoid,servicioxdia.id as servicioid,user_info.id as user_id,user_info.nombre as user_name,user_info.apellidos as user_apellidos, servicios.nombre as servicio_nombre, icon, servicioxdia.fecha_inicia as fecha, pago.monto as monto  FROM pago,servicioxdia,servicios,user_info WHERE pago.verificado is null AND pago.servicioxdia = servicioxdia.id AND servicioxdia.servicio=servicios.id AND user_info.user=servicioxdia.user order by pago.plandia';
+
+            $pagos =  new SqlDataProvider(['sql' => $query,]);
+
+            $query_planes='SELECT pago.id as pagoid,plane.id as servicioid, servicios.nombre as servicio_nombre, icon, min(plane.fecha_inicia) as fecha, pago.monto as monto  FROM pago,plane,servicios WHERE pago.verificado is null AND pago.plan = plane.id AND plane.servicio=servicios.id group by plane.id';
+
+            $pagos_planes = new SqlDataProvider(['sql' => $query_planes,]);                        
+
+            return $this->render('index_admin', [
                 'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,                
+                'dataProvider' => $dataProvider,    
+                'pagos'=> $pagos,        
+                'pagos_planes'=>$pagos_planes,    
             ]);            
 
         }else{
 
-            $query='SELECT pago.id as pagoid,servicioxdia.id as servicioid, servicios.nombre, icon, servicioxdia.fecha_inicia as fecha FROM pago,servicioxdia,servicios WHERE pago.verificado is null AND pago.user='.Yii::$app->user->id.' AND pago.servicioxdia = servicioxdia.id AND servicioxdia.servicio=servicios.id order by pago.plandia';
+            $query='SELECT pago.id as pagoid,servicioxdia.id as servicioid, servicios.nombre, icon, servicioxdia.fecha_inicia as fecha, pago.monto as monto  FROM pago,servicioxdia,servicios WHERE pago.verificado is null AND pago.user='.Yii::$app->user->id.' AND pago.servicioxdia = servicioxdia.id AND servicioxdia.servicio=servicios.id order by pago.plandia';
 
             $pagos = Yii::$app->db->createCommand($query)->queryAll();
 
+
+            $query_planes='SELECT pago.id as pagoid,plane.id as servicioid, servicios.nombre, icon, min(plane.fecha_inicia) as fecha, pago.monto as monto  FROM pago,plane,servicios WHERE pago.verificado is null AND pago.user='.Yii::$app->user->id.' AND pago.plan = plane.id AND plane.servicio=servicios.id group by plane.id';
+
+            $pagos_planes = Yii::$app->db->createCommand($query_planes)->queryAll();
+
             return $this->render('index', [
                     'pagos'=> $pagos,
-            ]);            
-
+                    'pagos_planes'=>$pagos_planes,
+            ]);  
 
         }
 
 
 
 
+    }
+
+
+    public function actionVerificar($id){
+        if(Yii::$app->user->can('admin')){
+            $model = $this->findModel($id);
+
+            $model->verificado=1;
+
+            $model->save();
+        }
     }
 
     /**
@@ -84,30 +113,12 @@ class PagoController extends Controller
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
-    /**
-     * Creates a new Pago model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     *
-    public function actionCreate()
-    {
-        $model = new Pago();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    */
 
     /**
      * Creates a new Pago model.

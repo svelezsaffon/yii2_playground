@@ -14,27 +14,6 @@ border: 0px solid #ddd;
 }
 </style>
 
-<script>
-
-function myFunction3() {
-    var boxesEL=document.getElementsByName('Plane[direccion]');    
-    
-    var found=false;
-    for(var x=0; x < boxesEL.length; x++)   // comparison should be "<" not "<="
-    {   
-      found=found || boxesEL[x].checked;
-    }
-
-    var axu=document.getElementById('nextstep3');
-
-     if(found){      
-      document.getElementById('meserv3').style.display="none";      
-    }
-
-    axu.disabled=!found;  
-}
-</script>
-
 <div class="container">
 
 	<h3 class="text-center">Seleciona la direccion donde el servicio sera realizado</h3>
@@ -74,7 +53,7 @@ function myFunction3() {
   					</div>
 
   					<div class="col-md-2">
-  					'.\yii\bootstrap\Html::radio($name, $checked,['value' => $label->id,'onclick'=>"myFunction3()",'label' => 'Seleccionar',]).'
+  					'.\yii\bootstrap\Html::radio($name, $checked,['value' => $label->id,'onclick'=>"verify_all_step3_planes()",'label' => 'Seleccionar',]).'
   					</div>
 
 				</div>	

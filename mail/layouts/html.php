@@ -15,7 +15,10 @@ use yii\helpers\Html;
 </head>
 <body>
     <?php $this->beginBody() ?>
+
+    
     <?= $content ?>
+    
     <?php $this->endBody() ?>
 </body>
 </html>

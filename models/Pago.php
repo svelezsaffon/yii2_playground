@@ -40,7 +40,7 @@ class Pago extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fecha_pago', 'user', 'plandia', 'metodo'], 'required'],
+            [['fecha_pago', 'user', 'plandia'], 'required'],
             [['fecha_pago', 'plandia'], 'safe'],
             [['user', 'servicioxdia', 'plan', 'metodo', 'verificado'], 'integer'],
             [['monto'], 'number'],

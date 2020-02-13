@@ -13,18 +13,18 @@ use app\models\Trabajador;
 class TrabajadorSearch extends Trabajador
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['cedula', 'telefono', 'nombre', 'apellido'], 'safe'],
+            [['id', 'anosexperiencia', 'serviciosprestados'], 'integer'],
+            [['cedula', 'telefono', 'nombre', 'apellido', 'descripcion'], 'safe'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -60,12 +60,15 @@ class TrabajadorSearch extends Trabajador
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'anosexperiencia' => $this->anosexperiencia,
+            'serviciosprestados' => $this->serviciosprestados,
         ]);
 
         $query->andFilterWhere(['like', 'cedula', $this->cedula])
             ->andFilterWhere(['like', 'telefono', $this->telefono])
             ->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'apellido', $this->apellido]);
+            ->andFilterWhere(['like', 'apellido', $this->apellido])
+            ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
 
         return $dataProvider;
     }

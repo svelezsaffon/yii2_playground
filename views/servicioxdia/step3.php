@@ -14,30 +14,8 @@ border: 0px solid #ddd;
 }
 </style>
 
-<script>
-
-function myFunction3() {
-    var boxesEL=document.getElementsByName('Servicioxdia[direccion]');    
-    
-    var found=false;
-    for(var x=0; x < boxesEL.length; x++)   // comparison should be "<" not "<="
-    {   
-      found=found || boxesEL[x].checked;
-    }
-
-    var axu=document.getElementById('nextstep3');
-
-     if(found){      
-      document.getElementById('meserv3').style.display="none";      
-    }
-
-    axu.disabled=!found;  
-}
-</script>
 
 <div class="container">
-
-	<h3 class="text-center">Seleciona la direccion donde el servicio sera realizado</h3>
 
 	<?php	
 
@@ -56,34 +34,26 @@ function myFunction3() {
 			$dires	,
 			['item' => function ($index, $label, $name, $checked, $value) {
 				return
-				'
-				<div class="row well">
-					<div class="col-md-10">
-					
-					<li class="media">
-    					<div class="media-left">
-      						<a>
-        						<img class="media-object" src="https://maps.googleapis.com/maps/api/staticmap?center='.$label->puntos_referencia.'&markers=color:green|label:S|'.$label->puntos_referencia.'&zoom=18&size=250x130&maptype=roadmap&key=AIzaSyD5BJZw2s9kaHkVsAoODp5i1xkfet2-wsI">	
-      						</a>
-    					</div>
-    					<div class="media-body">
-      						<h4 class="media-heading">'.$label->nombre.'</h4>
-      						<ul class="list-group">
-  								<li class="list-group-item" > <strong>Direccion:</strong> '.$label->direccion.'</li>
-  								<li class="list-group-item"><strong>Recibe:</strong> '.$label->quien_recibe.'</li>
-							</ul>
-    					</div>
-  					</li>
-  					</div>
-
-  					<div class="col-md-2">
-              <span class="badge">
-  					   '.\yii\bootstrap\Html::radio($name, $checked,['value' => $label->id,'onclick'=>"myFunction3()",'label' => 'Seleccionar',]).'
-              </span>
-  					</div>
-
-				</div>	
-				';
+			'   
+			<div class="col-md-4">      
+        		<div class="panel panel-primary">
+          			<div class="panel-body text-center">        
+            			 <div class="col-md-12" align="center">
+            			 <img class="media-object" src="https://maps.googleapis.com/maps/api/staticmap?center='.$label['puntos_referencia'].'&markers=color:green|label:S|'.$label['puntos_referencia'].'&zoom=18&size=250x130&maptype=roadmap&key=AIzaSyD5BJZw2s9kaHkVsAoODp5i1xkfet2-wsI">
+            			 </div>
+            			 <br>
+            			<h4 class="service-heading yeti"> '.$label['nombre'].'</h4>          
+            			<h6 class="service-heading yeti"> Direccion '.$label['direccion'].' </h6>
+            			<h6 class="service-heading yeti"> Ciudad '.$label['ciudad'].' </h6>            
+            			<h6 class="service-heading yeti"> Recibe '.$label['quien_recibe'].' </h6>  
+            	        <span class="badge">
+  					   '.\yii\bootstrap\Html::radio($name, $checked,['value' => $label['id'],'onclick'=>"verify_all_step3_dias(".$label['id'].")",'label' => 'Seleccionar',]).'
+              			</span>       
+          			</div>
+        		</div>      
+    		</div>
+			'
+			;
 			}]
 			)->label(false);
 		echo '</ul>';			

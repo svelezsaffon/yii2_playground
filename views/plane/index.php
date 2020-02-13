@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
 if(Yii::$app->user->can('admin')){
     echo Yii::$app->controller->renderPartial('index_admin', ['searchModel' => $searchModel,'dataProvider' => $dataProvider]);
 }else{
-    echo Yii::$app->controller->renderPartial('index_guest',['planes'=>$planes]);
+    echo Yii::$app->controller->renderPartial('index_guest',['planes'=>$planes,'cuentaver'=>$cuentaver,'linkcuenta'=>$linkcuenta ]);
 }
 
 ?>

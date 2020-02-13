@@ -1,0 +1,1 @@
+El trabajo ha sido acceptado por el proveedor de servicios, pronto se comunicaran contigo

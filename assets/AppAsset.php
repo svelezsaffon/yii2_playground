@@ -26,6 +26,9 @@ class AppAsset extends AssetBundle
         'js/main.js',
         'js/lettering.js',
         'js/textillate.js',
+        'js/trabajadores.js',
+        'js/emails.js',
+        'js/actpasos.js',
 
     ];
     public $depends = [

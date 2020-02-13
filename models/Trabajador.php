@@ -12,13 +12,18 @@ use Yii;
  * @property string $telefono
  * @property string $nombre
  * @property string $apellido
+ * @property int $anosexperiencia
+ * @property string $descripcion
+ * @property int $serviciosprestados
  *
- * @property Servicioxtrabajador[] $servicioxtrabajadors
+ * @property Plane[] $planes
+ * @property Ranking[] $rankings
+ * @property Servicioxdia[] $servicioxdias
  */
 class Trabajador extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -26,12 +31,14 @@ class Trabajador extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['cedula', 'telefono', 'nombre', 'apellido'], 'required'],
+            [['anosexperiencia', 'serviciosprestados'], 'integer'],
+            [['descripcion'], 'string'],
             [['cedula', 'nombre', 'apellido'], 'string', 'max' => 50],
             [['telefono'], 'string', 'max' => 25],
             [['cedula'], 'unique'],
@@ -39,7 +46,7 @@ class Trabajador extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -49,14 +56,33 @@ class Trabajador extends \yii\db\ActiveRecord
             'telefono' => 'Telefono',
             'nombre' => 'Nombre',
             'apellido' => 'Apellido',
+            'anosexperiencia' => 'Anosexperiencia',
+            'descripcion' => 'Descripcion',
+            'serviciosprestados' => 'Serviciosprestados',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getServicioxtrabajadors()
+    public function getPlanes()
     {
-        return $this->hasMany(Servicioxtrabajador::className(), ['trabajador' => 'id']);
+        return $this->hasMany(Plane::className(), ['trabajador' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRankings()
+    {
+        return $this->hasMany(Ranking::className(), ['idtrabajador' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicioxdias()
+    {
+        return $this->hasMany(Servicioxdia::className(), ['trabajador' => 'id']);
     }
 }

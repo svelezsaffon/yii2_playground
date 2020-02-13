@@ -10,15 +10,18 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\helpers\Url;
+use edwinhaq\simpleloading\SimpleLoading;
+use app\models\Notificaciones;
 
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 
 <head>
-
+    <?=SimpleLoading::widget()?>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -54,9 +57,6 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style type="text/css">
-.navbar {
-    margin-bottom: 0;
-}
 
 .center-justified {
   text-align: justify;
@@ -65,6 +65,8 @@ AppAsset::register($this);
 
 .top-buffer { margin-top:20px; }
 .top-buffer-60 { margin-top:100px; }
+.top-buffer-30 { margin-top:50px; }
+.top-buffer-15 { margin-top:30px; }
 .top-buffer-null { margin-top:0px; }
 .yeti{color: #1e90ff;}
 .red-yeti{color: #FF3333;}
@@ -72,10 +74,32 @@ AppAsset::register($this);
     margin-left: 1px;
 }
 
-.my-navbar {
-    background-color: #1e90ff;
+.navbar {
+    background-color: #808080;
+    border-color: #808080;
+    margin-bottom: 0;
 }
 
+
+.grey-text{
+    color: #A9A9A9; 
+    text-transform: none;
+}
+
+.yeti-text{
+    color: #1e90ff; 
+    text-transform: none;
+}
+
+section {
+  width: 100%;
+  padding: 0 0%;
+  display: table;
+  margin: 0;
+  max-width: none;  
+  height: 100vh;
+}
+  
 </style>
 
 </head>
@@ -85,30 +109,66 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Servicio 24/7',
+        'brandLabel' => 'Serviciso247', 
+        //'brandLabel' => '<img src="img/logos/logoservicios.jpg" style="max-width:10%;" class="img-responsive"/>', 
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
+            'style' => 'color: #ffffff; border-style: solid; border-color: #808080 #e5e500 #808080 #808080;',
         ],
+
     ]);
     $items=[];
     
     if(Yii::$app->user->isGuest ){
         $items=[
-            ['label' => 'Ingresar','icon'=> 'road', 'url' => ['site/login']],
-            ['label' => 'Registrarse','icon'=> 'road', 'url' => ['site/signup']],
+            ['label' => 'Trabaja con nosotros','icon'=> 'road', 'url' => Url::to('index.php?r=aplicacion-trabajos/create')],
+            ['label' => 'Ingresar','icon'=> 'road', 'url' =>  Url::to('index.php?r=site/login')],
+            ['label' => 'Registrarse','icon'=> 'road', 'url' => Url::to('index.php?r=site/signup')]
             
         ];
     }else if(Yii::$app->user->can('admin')){
             
             $items=[
-            ['label' => 'Servicios','icon'=> 'road', 'url' => ['/servicios']],
-            ['label' => 'Trabajadores','icon'=> 'road', 'url' => ['/trabajador']],            
-            ['label' => 'Direcciones','icon'=> 'road', 'url' => ['/direccion']],
-            ['label' => 'Servicios x dia', 'url' => ['/servicioxdia']],
-            ['label' => 'Planes', 'url' => ['/plane']],
-            ['label' => 'Pagos', 'url' => ['/pago']],
-            ['label' => 'Servicos x empleado', 'url' => ['/trabajadordesem']],
+
+            ['label' => 'Sitios',
+                        'items' => [
+                                        ['label' => 'Ciudades', 'url' => ['/ciudades']],
+                                        ['label' => 'Direcciones','icon'=> 'road', 'url' => ['/direccion']],
+                        ],
+            ],
+            ['label' => 'Servicios',
+                        'items' => [
+                                        ['label' => 'Servicios','icon'=> 'road', 'url' => ['/servicios']],
+                                        ['label' => 'Servicios x dia', 'url' => ['/servicioxdia']],                                        
+                                        ['label' => 'Planes', 'url' => ['/plane']],
+                                        ['label' => 'Horarios', 'url' => ['/horarios']],
+                                        ['label' => 'Horario X Servicios', 'url' => ['/horarioxservicio']],
+                                        ['label' => 'Ranking','icon'=> 'road', 'url' => ['/ranking']],                        
+                        ],
+            ],
+            ['label' => 'Empleados',
+                        'items' => [                                        
+                                        ['label' => 'Aplicaciones de trabajo', 'url' => ['/aplicacion-trabajos']],
+                                        ['label' => 'Servicos x empleado', 'url' => ['/trabajadordesem']],
+                                        ['label' => 'Trabajadores','icon'=> 'road', 'url' => ['/trabajador']],                        
+
+                        ],
+            ],            
+            ['label' => 'Dinero',
+                        'items' => [                                        
+                                        ['label' => 'Costos', 'url' => ['/costos']],            
+                                        ['label' => 'Pagos', 'url' => ['/pago']],
+                                        ['label' => 'Convenios', 'url' => ['/convenios-pago']],
+                        ],
+            ], 
+            ['label' => 'Usuarios',
+                        'items' => [                                        
+                                        ['label' => 'Usuarios', 'url' => ['/user-info']],            
+                                        ['label' => 'Facebook', 'url' => ['/facebook-data']],
+                                        ['label' => 'Cuentas verificadas', 'url' => ['/cuentaverificada']],
+                        ],
+            ], 
 
             (
                 '<li>'
@@ -121,17 +181,76 @@ AppAsset::register($this);
                 . '</li>'
             )
         ];
-    }else{
+    }else if(Yii::$app->user->can('user')){
 
+    $notis_query=Notificaciones::find()->where(['para' => Yii::$app->user->id, 'leida'=>0])->all();
+
+    $size=0;
+
+    $items_notis=[];
+
+    foreach($notis_query as $noti){
+        array_push($items_notis,[
+            'label' => $noti['titulo'], 
+            'url' =>  Url::to('index.php?r=/notificaciones/view&id='.$noti['id'])]);
+        $size++;
+    }
+
+    
 
         $items=[
-            ['label' => 'Mis direcciones','icon'=> 'road', 'url' => ['/direccion']],
-            ['label' => 'Mis servicios por dia', 'url' => ['/servicioxdia']],                        
-            ['label' => 'Mis Planes', 'url' => ['/plane']],                        
-            ['label' => 'Mis pagos', 'url' => ['/pago']],
+ 
+            ['label' => 'Mis direcciones','icon'=> 'road', 'url' => ['/direccion'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],
+            ['label' => 'Mis servicios por dia', 'url' => ['/servicioxdia'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],                        
+            ['label' => 'Mis Planes', 'url' => ['/plane'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],                        
+            ['label' => 'Mis pagos', 'url' => ['/pago'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],
+            
+            ['label' => 'Puntuaciones', 'url' => ['/ranking'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],
+
+            ['label' => 'Notificaciones '. Html::tag('span', $size, ['class' => 'badge']),
+                        'items' => $items_notis,
+
+                        'linkOptions' =>['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']
+            ],
 
             (
-                '<li>'
+                '<li >'
+                . Html::beginForm(['/site/logout'], 'post')
+                . Html::submitButton(
+                    'Salir (' . Yii::$app->user->identity->username . ')',
+                    ['class' => 'btn btn-link logout']
+                )
+                . Html::endForm()
+                . '</li>'
+            )
+
+        ];
+    }else if(Yii::$app->user->can('seller')){
+
+    $notis_query=Notificaciones::find()->where(['para' => Yii::$app->user->id, 'leida'=>0])->all();
+
+    $size=0;
+
+    $items_notis=[];
+
+    foreach($notis_query as $noti){
+        array_push($items_notis,[
+            'label' => $noti['titulo'], 
+            'url' =>  Url::to('index.php?r=/notificaciones/view&id='.$noti['id'])]);
+        $size++;
+    }
+
+        $items=[            
+                                    
+            ['label' => 'Servicios Prestados', 'url' => ['/costos'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],
+            ['label' => 'Notificaciones '. Html::tag('span', $size, ['class' => 'badge']),
+                        'items' => $items_notis,
+
+                        'linkOptions' =>['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']
+            ],            
+            
+            (
+                '<li >'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
                     'Salir (' . Yii::$app->user->identity->username . ')',
@@ -143,10 +262,13 @@ AppAsset::register($this);
         ];
     }
 
+
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],        
-
+        
         'items' => $items,
+        'encodeLabels' => false,
     ]);
     NavBar::end();
     ?>
@@ -161,9 +283,19 @@ AppAsset::register($this);
 
 
 
-<footer class="footer">
+<footer class="footer">    
     <div class="container">
-        <?= Html::a(' Terminos y condiciones', ['site/legal'], ['value'=>Url::to('index.php?r=site/legal'),'id'=>'modalButton','class'=>'yeti']) ?>
+        <div class="row">
+            <div class="col-md-12"> 
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="https://wa.me/573008080860" target="_blank">
+                            <i class="fab fa-whatsapp-square fa-stack-2x yeti">3008080860</i>
+                        </a>                         
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </footer>
 

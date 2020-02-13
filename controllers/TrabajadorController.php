@@ -44,6 +44,15 @@ class TrabajadorController extends Controller
         return "svs";
     }
 
+
+
+    public function actionGetname($id){
+
+        $model=Trabajador::find()->where(['id' => $id])->one();
+
+        return $model->nombre." ".$model->apellido;
+    }
+
     /**
      * Lists all Trabajador models.
      * @return mixed
@@ -78,10 +87,10 @@ class TrabajadorController extends Controller
             return $this->render('view', [
                 'model' => $this->findModel($id),
                 ]);
-        }else{
-            
-            return $this->redirect(['/']);
-
+        }else{            
+            return $this->render('view_user', [
+                'model' => $this->findModel($id),
+            ]);
         }
     }
 

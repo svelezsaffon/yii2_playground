@@ -18,13 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
       <h3><font color="grey">Tu servicio se ve de la siguiente manera</font></h3>
     </div>
                 <div class="row text-center">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
 
 
                     <?= Html::a('<i class="fas fa-edit"></i> Editar',['update', 'id' => $model->id], ['class' => 'btn btn-black yeti', 'title' => 'Sign Up']) ?>
 
                 </div>                
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                             <?= Html::a('<i class="fas fa-eraser"></i> Borrar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-black yeti',
             'data' => [
@@ -33,6 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             ]) ?>
                 </div>
+
+                <div class="col-lg-4">
+                    <?= Html::a('<i class="fas fa-dollar-sign"></i> Pagar',['/pago/update','id'=>$model->pago_id], ['class' => 'btn btn-black yeti', 'title' => 'Pagar']) ?>
+                </div>                
                 
             </div>
   </div>

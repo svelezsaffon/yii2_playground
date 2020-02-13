@@ -14,8 +14,6 @@ use bookin\aws\checkbox\AwesomeCheckbox;
   </div>
   <?php $form = ActiveForm::begin(); ?>
 
-
-
   <div class="row">   
     <h3 class="well text-center">Selecciona el metodo que mas te sirva</h3>
   </div> 
@@ -25,11 +23,10 @@ use bookin\aws\checkbox\AwesomeCheckbox;
     $dires=array();
     $index=0;
     foreach ($metodos as $metodo){ 
-      $dires[$index]=$metodo;
+      $dires[$index]=['metodo'=>$metodo,'pago'=>$model];
       $index=$index+1;
     }
-
-    Yii::$app->formatter->locale = 'COP';
+    
 
     echo $form->field($model, 'metodo')->radioList(
       $dires  ,
@@ -38,27 +35,32 @@ use bookin\aws\checkbox\AwesomeCheckbox;
         '
        <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img class="media-object" src="/web/img/'.$label->image.'">
+      <img class="media-object" src="img/'.$label['metodo']->image.'">
         <div class="caption">
-            <h3 class="text-center"> '.Yii::$app->formatter->asCurrency($label->valor, 'COP').'</h3>        
+            <h3 class="text-center">$ '.Yii::$app->formatter->asCurrency($label['pago']->monto, 'COP').'</h3>        
             <ul class="list-group">
                 <li class="list-group-item">Cuenta de ahorros</li>
-                <li class="list-group-item">#379-47654-25</li>
+                <li class="list-group-item">#059-000290-14</li>
             </ul>      
         </div>
 
-        <h3 class="text-center">Puedes utilizar un QR</h3>        
-        <img class="media-object" src="/web/img/qrservicios.jpeg">
+        <h4 class="text-center">Utiliza el APP Bancolombia para hacer to pago y envianos el recibo al 
+          <i class="fab fa-whatsapp"> 3008080860</i>
+        </h4>        
+
+        <a href="img/qrservicios.png" download>
+          <img class="media-object" src="img/qrservicios.png">
+        </a>
 
         <div class="text-center">
-            '.\yii\bootstrap\Html::radio($name, $checked,['value' => $label->id,'label' => 'Seleccionar',]).',
+            '.\yii\bootstrap\Html::radio($name, $checked,['value' => $label['metodo']->id,'label' => 'Seleccionar',]).',
         </div>
 
     </div>
 
     <div class="btn-group">
-        <a href="https://wa.me/573224966850" class="btn btn-primary active">
-            <i class="fab fa-whatsapp"></i> comunicate por whatsapp - click aqui
+        <a href="https://wa.me/573008080860" class="btn btn-primary active">
+            <i class="fab fa-whatsapp"></i> Escribenos en whatsapp - click aqui
         </a>    
     </div>
     

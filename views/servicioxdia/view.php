@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="row text-center">
                 <div class="col-lg-4">
 
-
                     <?= Html::a('<i class="fas fa-edit"></i> Editar',['update', 'id' => $model->id], ['class' => 'btn btn-black yeti', 'title' => 'Sign Up']) ?>
 
                 </div>                
@@ -34,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
                 </div>
                 <div class="col-lg-4">
-                    <?= Html::a('<i class="fas fa-dollar-sign"></i> Pagar',['/pago/creates','id'=>$model->id], ['class' => 'btn btn-black yeti', 'title' => 'Pagar']) ?>
+                    <?= Html::a('<i class="fas fa-dollar-sign"></i> Pagar',['/pago/update','id'=>$model->pago], ['class' => 'btn btn-black yeti', 'title' => 'Pagar']) ?>
                 </div>
             </div>
   </div>
@@ -102,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <div class="text-center">
-        <?= Html::a('¿Quieres Pagar este servicio de una vez?', ['/pago/createp','id'=>$model->id], ['class'=>'btn btn-primary text-center']) ?>
+        <?= Html::a('¿Quieres Pagar este servicio de una vez?', ['/pago/update','id'=>$model->pago], ['class'=>'btn btn-primary text-center']) ?>
     </div>
 
     </div>

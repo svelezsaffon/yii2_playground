@@ -9,14 +9,13 @@ use bookin\aws\checkbox\AwesomeCheckbox;
 <script>
 
   function myFunction2() {
-    var boxesEL=document.getElementsByName('Plane[timepo]');    
     
-    var found=false;
+    
+    var found=true;
     var fecha=false;
-    for(var x=0; x < boxesEL.length; x++)   // comparison should be "<" not "<="
-    {   
-      found=found || boxesEL[x].checked;
-    }
+    
+
+    
 
     fecha= document.getElementById('plane-fecha_inicia').value!='';
 
@@ -84,12 +83,10 @@ use bookin\aws\checkbox\AwesomeCheckbox;
       </div>  
     </div> 
 
+    <div class="col-lg-5 col-lg-offset-1">
 
-    <div class="col-lg-1"></div>
-
-
-    <div class="col-lg-5">
       <div class="row">
+      <div class="col-lg-12">
         <div class="panel panel-default">        
           <div class="panel-heading">
             <h3>
@@ -100,7 +97,11 @@ use bookin\aws\checkbox\AwesomeCheckbox;
            <?= $form->field($model, 'semanal')->dropDownList([true => 'Semanal', false => 'Quincenal'] )->label(false)?>
          </div>
        </div>
-     </div>
+       </div>
+       </div>
+
+    <div class="row">
+      <div class="col-lg-12">
      <div class="panel panel-default">
       <!-- Default panel contents -->
       <div class="panel-heading"><h3> <?= Html::encode('¿Que dias de la semana necesitas el servicio?') ?></h3></div>
@@ -144,43 +145,38 @@ use bookin\aws\checkbox\AwesomeCheckbox;
 
       </div>
     </div>
-  </div> 
+    </div>
+    </div>
 
-</div>
+
+ </div>
+</div> 
+
+
 
 
 <div class="row">
-
+<div class="col-lg-12">
   <div class="panel panel-default">
     <!-- Default panel contents -->
-    <div class="panel-heading"><h3> <?= Html::encode('¿En que horario necesitas el servicio?') ?></h3></div>
-    <div class="panel-body">
+      <div class="panel-heading"><h3> <?= Html::encode('¿En que horario necesitas el servicio?') ?></h3></div>
+      <div class="panel-body">
 
-      <?php 
-
-      echo $form->field($model, 'timepo')->radioList(
-        ['4am'=>"4 Horas - Madrugada - 8:00am a 12:00pm",'4pm'=>"4 Horas - Tarde - 1:30pm a 5:30pm",'8ful'=>"8 Horas - Dia Entero- 8:00am a 5:00pm"]      ,
-        ['item' => function ($index, $label, $name, $checked, $value) {
-          return 
-          '
-          <div class="well">
-            <div class="row">
-              <div class="col-lg-10">'.$label.'</div>
-              <div class="col-lg-2">'.\yii\bootstrap\Html::radio($name, $checked,['value' => $value,'onclick'=>"myFunction2()",'label' => 'Seleccionar',])
-                .'</div>    
-              </div>
-            </div>      
-            '; 
-          }]
-          )->label(false);
-
-          ?>
-
-        </div>
-      </div>      
+            
+            <?php 
+              if(isset($horarios)){
+                echo $form->field($model, 'timepo')->dropDownList($horarios)->label(false);
+              }else{
+                echo $form->field($model, 'timepo')->dropDownList([])->label(false);      
+              }        
+            ?>
+        
 
 
-    </div>
+      </div>
+    </div>      
+  </div>  
+</div>
 
 
 

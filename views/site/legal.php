@@ -20,7 +20,7 @@
 	<br>
 
 	<p class="center-justified">
-		LA EMPRESA tiene por objeto facilitar personal para la realización de tareas de limpieza de hogares y oficinas, realización de diligencias personales dentro del casco urbano y acompañamiento bajo las figuras de “conductor elegido” y “acompañante”.
+		LA EMPRESA tiene por objeto facilitar personal para la realización de tareas de limpieza de hogares y oficinas, realización de diligencias personales dentro del casco urbano y acompañamiento bajo las figuras de “conductor elegido”
 	</p>
 	<br>
 
@@ -30,7 +30,7 @@
 	<br>
 
 	<p class="center-justified">
-		En el momento actual LA EMPRESA tiene registrado los dominios SERVICIOS247.CO (en adelante, EL SITIO WEB). La dirección general de correo electrónico es                                         Ambos son de propiedad y están bajo la administración de la SOCIEDAD INTERMEDIARIA DE NEGOCIOS SAS con NIT. 900799396-5
+		En el momento actual LA EMPRESA tiene registrado los dominios SERVICIO247.CO (en adelante, EL SITIO WEB). La dirección general de correo electrónico es notificaciones@servicio247.co Ambos son de propiedad y están bajo la administración de la SOCIEDAD INTERMEDIARIA DE NEGOCIOS SAS con NIT. 900799396-5
 	</p>
 	<br>
 
@@ -105,7 +105,8 @@
 	<h3>Notificaciones</h3>
 
 	<p class="center-justified">
-		Todas las notificaciones o comunicaciones realizadas por los usuarios a LA EMPRESA se considerarán eficaces, a todos los efectos, cuando se dirijan a la dirección de correo electrónico xxxxxxxx@xxxx
+		Todas las notificaciones o comunicaciones realizadas por los usuarios a LA EMPRESA se considerarán eficaces, a todos los efectos, cuando se dirijan a la dirección de correo electrónico notificaciones@servicio247.co
+
 		De igual forma, todas las notificaciones que realice LA EMPRESA al usuario se considerarán eficaces, a todos los efectos, cuando se realicen por alguna de las siguientes formas:
 		Mediante envío postal a la dirección que el usuario haya previamente puesto en conocimiento de la Empresa.
 		Mediante llamada telefónica al número que el usuario haya puesto previamente en conocimiento de la Empresa.
@@ -149,7 +150,7 @@
 	<br>
 
 	<p class="center-justified">
-		Acompañamiento bajo las figuras de “conductor elegido” y “acompañante”: LA EMPRESA prestará los servicios de acompañamiento con personal a su cargo y calificado para conducir. En el caso de que el servicio se preste en el vehículo del usuario, este deberá contar con todos los seguros obligatorios así como póliza todo riesgo y por lo tanto será de exclusiva responsabilidad del usuario cualquier accidente, daño, comparendo o inmovilización que se presente durante la prestación del servicio.
+		Acompañamiento bajo las figuras de “conductor elegido”: LA EMPRESA prestará los servicios de acompañamiento con personal a su cargo y calificado para conducir. En el caso de que el servicio se preste en el vehículo del usuario, este deberá contar con todos los seguros obligatorios así como póliza todo riesgo y por lo tanto será de exclusiva responsabilidad del usuario cualquier accidente, daño, comparendo o inmovilización que se presente durante la prestación del servicio.
 	</p>
 	<br>
 
@@ -214,7 +215,7 @@
 
 				<p class="center-justified">
 					El usuario podrá cambiar o cancelar la programación del servicio de aseo y las actividades contratadas hasta con veinticuatro (24) horas de anticipación contadas al momento del inicio del servicio. Vencido este término el servicio se cobrará plenamente.
-					En el caso de “conductor elegido”, “acompañante” y “diligencias personales” la cancelación y/o cambio solo podrá hacerse con cuatro (4) horas de anticipación. Vencido este término el servicio se cobrará plenamente.
+					En el caso de “conductor elegido” y “diligencias personales” la cancelación y/o cambio solo podrá hacerse con cuatro (4) horas de anticipación. Vencido este término el servicio se cobrará plenamente.
 					LA EMPRESA podrá cambiar o cancelar la programación del servicio en cualquier momento sin que esto constituya incumplimiento de ningún tipo, en este caso el usuario podrá decidir si reprograma el servicio o se efectúa la devolución del dinero. En este último caso la devolución se efectuará dentro de los XX días hábiles siguientes y a través de los siguientes medios: XXXXXX
 				</p>
 				<br>
@@ -237,11 +238,11 @@
 
 				<p class="center-justified">
 					El usuario se compromete adicionalmente a: 
-					Tratar de manera respetuosa a todo el personal de LA EMPRESA
-					Mantener bajo su custodia y responsabilidad todos los objetos de valor, dinero, joyas y armas de su propiedad o tenencia
-					Atacar física o verbalmente al personal de LA EMPRESA
-					Cometer actos sexuales o indecentes frente al personal de LA EMPRESA
-					Abstenerse de contratar directamente al personal de LA EMPRESA. En caso de que incumpla esta obligación no se le volverá a prestar ningún servicio de los ofertados
+					Tratar de manera respetuosa a todo el personal de LA EMPRESA;
+					Mantener bajo su custodia y responsabilidad todos los objetos de valor, dinero, joyas y armas de su propiedad o tenencia;
+					Abstenerse de atacar física o verbalmente al personal de LA EMPRESA;
+					Abstenerse de cometer actos sexuales o indecentes frente al personal de LA EMPRESA;
+					Abstenerse de contratar directamente al personal de LA EMPRESA. En caso de que incumpla esta obligación no se le volverá a prestar ningún servicio de los ofertados;
 					Respetar el horario del servicio contratado
 					A informar de manera inmediata a LA EMPRESA cualquier irregularidad o situación que afecte la correcta prestación del servicio
 					Auxiliar de manera inmediata al personal de LA EMPRESA en caso de presentarse algún accidente e informar, también de manera inmediata, a LA EMPRESA
@@ -279,3 +280,9 @@
 				<br>
 
 			</div>
+
+<div class="row">
+	<div class="col-mg-12 text-center">
+		<a href=<?php echo Yii::$app->homeUrl; ?> > Volver al home</a>
+	</div>
+</div>			

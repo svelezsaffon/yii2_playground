@@ -13,13 +13,17 @@ use Yii;
  * @property string $nombre
  * @property string $puntos_referencia
  * @property string $quien_recibe
+ * @property int $ciudad
  *
+ * @property Ciudades $ciudad0
  * @property User $user0
+ * @property Plane[] $planes
+ * @property Servicioxdia[] $servicioxdias
  */
 class Direccion extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -27,21 +31,22 @@ class Direccion extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['user', 'direccion', 'nombre'], 'required'],
-            [['user'], 'integer'],
+            [['user', 'direccion', 'nombre', 'ciudad'], 'required'],
+            [['user', 'ciudad'], 'integer'],
             [['direccion', 'puntos_referencia', 'quien_recibe'], 'string'],
-            [['nombre'], 'string', 'max' => 200],            
+            [['nombre'], 'string', 'max' => 200],
+            [['ciudad'], 'exist', 'skipOnError' => true, 'targetClass' => Ciudades::className(), 'targetAttribute' => ['ciudad' => 'id']],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -52,7 +57,16 @@ class Direccion extends \yii\db\ActiveRecord
             'nombre' => 'Nombre',
             'puntos_referencia' => 'Puntos Referencia',
             'quien_recibe' => 'Quien Recibe',
+            'ciudad' => 'Ciudad',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCiudad0()
+    {
+        return $this->hasOne(Ciudades::className(), ['id' => 'ciudad']);
     }
 
     /**
@@ -61,5 +75,21 @@ class Direccion extends \yii\db\ActiveRecord
     public function getUser0()
     {
         return $this->hasOne(User::className(), ['id' => 'user']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPlanes()
+    {
+        return $this->hasMany(Plane::className(), ['direccion' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicioxdias()
+    {
+        return $this->hasMany(Servicioxdia::className(), ['direccion' => 'id']);
     }
 }

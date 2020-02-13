@@ -1,12 +1,45 @@
 <script>
+  function obenter(id) {
+
+    SimpleLoading.start('gears');
+    
+    $.post("index.php?r=horarioxservicio/list&idtrabajo="+id,
+              function( data ) {
+                  obtenerNombre(id);                       
+                  $("select#plane-timepo" ).html(data);                  
+                  SimpleLoading.stop(); 
+              }
+          ); 
+
+  }
+
+  function obtenerNombre(id){
+    
+    $.get("index.php?r=servicios/getname&id="+id,
+              function( data ) {                  
+                  update_pasos('text1q',data);
+              }
+          );
+  }
+
+</script>
+
+
+<script>
 
 function myFunction1() {
     var boxesEL=document.getElementsByName('Plane[servicio]');    
     
     var found=false;
+    var value;
     for(var x=0; x < boxesEL.length; x++)   // comparison should be "<" not "<="
     {   
       found=found || boxesEL[x].checked;
+
+        if(found){
+          value=boxesEL[x].value;
+          break;
+        }
     }
 
     var axu=document.getElementById('nextstep1');
@@ -14,7 +47,8 @@ function myFunction1() {
     if(!found){
       document.getElementById('meserv').innerHTML="Deber selecionar un servicio!!";      
     }else{
-      document.getElementById('meserv').style.display="none";      
+      document.getElementById('meserv').style.display="none";   
+      obenter(value);   
     }
 
     axu.disabled=!found;  

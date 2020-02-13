@@ -24,12 +24,12 @@ if(sizeof($direccionesModel) == 0){
             <div class="alert alert-danger" role="alert">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Para configurar un plan recurrente, debes tener primero una direccion a dodne se va a realizar tu servicio</h2>
+                        <h2>Para configurar un plan recurrente, debes tener primero una dirección a donde se va a realizar tu servicio</h2>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <?=Html::button('Crear direccion', ['value'=>Url::to('index.php?r=direccion/createmodal&loc=11'),'class'=>' btn btn-danger', 'id'=>'modalButton'])?>
+                        <?=Html::button('Crear dirección', ['value'=>Url::to('index.php?r=direccion/createmodal&loc=11'),'class'=>' btn btn-danger', 'id'=>'modalButton'])?>
                     </div>                  
                 </div>
             </div> 
@@ -59,6 +59,12 @@ $wizard_config = [
                         'title'=>"debes seleccionar un servicio antes de seguir!",
                     ],
                  ],
+                'prev' => [
+                    'title' => 'Anterior', 
+                    'options' => [
+                        'class' => 'btn btn-primary',
+                    ],
+                 ],                   
              ],
         ],
         2 => [
@@ -77,12 +83,42 @@ $wizard_config = [
                         'title'=>"Debes especificar una fecha y el horario antes de seguir!",                        
                     ],
                  ],
+                'prev' => [
+                    'title' => 'Anterior', 
+                    'options' => [
+                        'class' => 'btn btn-primary',
+                    ],
+                 ],                   
              ],
         ],
         3 => [
+            'title' => 'Recurencia',
+            'icon' => 'glyphicon glyphicon-calendar',
+            'content' =>  Yii::$app->controller->renderPartial('step3', ['model' => $model,'form'=>$form,'direcciones'=>$direccionesModel]),
+            'skippable' => false,
+            'buttons' => [
+                'next' => [
+                    'title' => 'Siguiente', 
+                    'options' => [
+                        'class' => 'btn btn-primary',
+                        'id' =>'nextstep3',
+                        'disabled'=>true,
+                        'data-toggle'=>"tooltip",
+                        'title'=>"Debes selecionar una direccion!"
+                    ],
+                 ],
+                'prev' => [
+                    'title' => 'Anterior', 
+                    'options' => [
+                        'class' => 'btn btn-primary',
+                    ],
+                 ],                   
+             ],
+        ],        
+        4 => [
             'title' => 'Direccion',
-            'icon' => 'glyphicon glyphicon-road',
-            'content' => Yii::$app->controller->renderPartial('step3', ['model' => $model,'form'=>$form,'direcciones'=>$direccionesModel]),
+            'icon' => 'glyphicon glyphicon-user',
+            'content' => Yii::$app->controller->renderPartial('step4', ['model' => $model,'form'=>$form,'direcciones'=>$direccionesModel]),
             'skippable' => false,
             'buttons' => [  
                     'save' => [
@@ -90,15 +126,19 @@ $wizard_config = [
                         Yii::t('app', 'Guardar'),
                         [
                             'class' => 'btn btn-primary',
-                            'id' => 'nextstep3',
+                            'id' => 'finalstepplanes',
                             'name' => 'step',
                             'disabled'=>true,
                             'value' => 'save-final',
-                            'data-toggle'=>"tooltip",
-                            'title'=>"Debes selecionar una direccion!"
                         ]
                     ),
-                ],               
+                ],
+                'prev' => [
+                    'title' => 'Anterior', 
+                    'options' => [
+                        'class' => 'btn btn-primary',
+                    ],
+                 ],  
 
              ],
         ],

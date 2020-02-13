@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+
+use app\models\Trabajador;
 /**
  * UserInfoController implements the CRUD actions for UserInfo model.
  */
@@ -20,22 +22,22 @@ class UserInfoController extends Controller
     public function behaviors()
     {
         return [
-            'access'=>[
-                'class'=>AccessControl::className(),
-                'only'=>['create','update','index','delete','view'],
-                'rules'=>[
-                    [
-                        'allow'=>true,
-                        'roles'=>['@']
-                    ]
-                ]
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
+        'access'=>[
+        'class'=>AccessControl::className(),
+        'only'=>['create','update','index','delete','view'],
+        'rules'=>[
+        [
+        'allow'=>true,
+        'roles'=>['@']
+        ]
+        ]
+        ],
+        'verbs' => [
+        'class' => VerbFilter::className(),
+        'actions' => [
+        'delete' => ['POST'],
+        ],
+        ],
         ];
     }
 
@@ -53,6 +55,8 @@ class UserInfoController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+
 
     /**
      * Displays a single UserInfo model.
@@ -75,44 +79,32 @@ class UserInfoController extends Controller
     public function actionCreate()
     {
         $model = new UserInfo();
-        $model->user=Yii::$app->user->id;   
-        if ($model->load(Yii::$app->request->post())) {
-        if ($model->save()) {             
-            if (Yii::$app->request->isAjax) {
-                // JSON response is expected in case of successful save
-                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                return $this->redirect(['/','success' => true]);
-            }
-            return $this->redirect(['view', 'id' => $model->id]);             
-        }
-    }
 
-    if (Yii::$app->request->isAjax) {
-        return $this->renderAjax('create', [
-            'model' => $model,
-        ]);
-    } else {
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    }
-    /*
-    public function actionCreate()
-    {
-        $model = new UserInfo();
         $model->user=Yii::$app->user->id;   
 
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
 
+            if(Yii::$app->user->can('seller')){
+                $trab=new Trabajador();
+                $trab->nombre=$model->nombre;
+                $trab->apellido=$model->apellidos;                
+                $trab->cedula=$model->cedula;
+                $trab->telefono=$model->celular; 
+                $trab->id=$model->user;    
+                $trab->anosexperiencia=0;
+                $trab->serviciosprestados=0;
+                $trab->save();
+            }
+
+            return $this->goHome();
+        }
+        
         return $this->render('create', [
             'model' => $model,
-        ]);
+        ]);    
+
     }
-    */
 
     /**
      * Updates an existing UserInfo model.
@@ -126,7 +118,7 @@ class UserInfoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->goHome();
         }
 
         return $this->render('update', [

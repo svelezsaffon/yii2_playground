@@ -54,6 +54,8 @@ class ServiciosController extends Controller
             ]);
     }
 
+
+
     /**
      * Displays a single Servicios model.
      * @param integer $id
@@ -104,6 +106,16 @@ class ServiciosController extends Controller
         }
 
         
+    }
+
+
+
+    public function actionGetname($id){
+
+        $model=Servicios::find()->where(['id' => $id])->one();
+
+        return $model->nombre;
+
     }
 
     /**

@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model,'allServicios'=>$allServicios,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
+        'model' => $model,'allServicios'=>$allServicios,'userinfo'=>$userinfo,'direccionesModel'=>$direccionesModel,'trabajadorModel'=>$trabajadorModel
     ]) ?>
 
 </div>

@@ -7,16 +7,27 @@ use yii\helpers\Url;
 $this->title = 'Servicio por dias';
 $this->params['breadcrumbs'][] = $this->title;
 $events = array();
+
 ?>
+
+
+
+<?php 
+
+
+if($cuentaver==true){
+
+?>
+
 <div class="servicioxdia-index">
 
     <div class="container top-buffer-null">
 
         <div class="row">
             <div class="jumbotron">
-                <h1 class="section-heading"><?= Html::encode($this->title) ?></h1>
+                <h2 class="section-heading"><?= Html::encode($this->title) ?></h2>
                 <p>En esta seccion encontraras el listado de los servicios que has contratado por dias y podras ver el calendario en que estos fueron programados</p>
-                <p><?= Html::a('Crear nuevo servicio por dia', ['create'], ['class' => 'btn btn-primary','style'=>'width:40%;']) ?></p>
+                <p><?= Html::a('Crear servicio por dia', ['create'], ['class' => 'btn btn-primary','style' => 'padding-right:10px;']) ?></p>
             </div>
 
         </div>
@@ -68,7 +79,7 @@ $events = array();
                                         <div class="row yeti">Editar</div>
                                     </a>
                                 <?php }else{ ?>
-                                    <a href=<?= Url::toRoute(['/pago/update','id'=>$servicio['id']])?> > <i class="fas fa-dollar-sign fa-2x red-yeti"></i>
+                                    <a href=<?= Url::toRoute(['/pago/update','id'=>$servicio['idpago']])?> > <i class="fas fa-dollar-sign fa-2x red-yeti"></i>
                                         <div class="row red-yeti">Pagar</div>
                                     </a>
                                 <?php } ?>
@@ -91,7 +102,6 @@ $events = array();
                 <h3 class="well text-center">
                     Asi se ve tu calendario de servicios
                 </h3>
-
                 
                     <?php                
                         echo \yii2fullcalendar\yii2fullcalendar::widget(array(
@@ -104,3 +114,44 @@ $events = array();
 
     </div>
 </div>
+
+<?php 
+
+}else{
+?>
+
+<div class="alert alert-danger text-center" role="alert">
+  
+  <div class="row">
+    <h1>Necesitamos que confirmes tu cuenta</h1>
+  </div>
+  
+  <div class="row text-center">
+      Puedes verificar tu cuenta de dos formas:
+      <ol>
+        <li>¿Despues? Boton amarillo... Puedes hacerlo con el email que te hemos enviado, el link estara almacenado en tu correo electronico</li>
+        <li>¿Ya? Boton azul...seras redireccionado a una pagian para llenar los datos</li>        
+      </ol>
+  </div>
+
+<br>
+  <div class="row text-center">
+    
+    <div class="row">
+      <div class="col-sm-6">
+        <button type="button" class="btn btn-primary" onclick="enviarEmail(<?=Yii::$app->user->id?>)" aria-label="Left Align">
+          <span class="glyphicon glyphicon-envelope" aria-hidden="true"> Reenviar email</span>
+        </button>
+      </div>
+      <a class="btn btn-info" href=<?php echo $linkcuenta; ?> role="button"><i class="fas fa-check-double" aria-hidden="true"> Verificar Ahora</i></a>
+    </div>
+
+
+  </div>
+
+
+</div> 
+
+<?php
+}
+?>

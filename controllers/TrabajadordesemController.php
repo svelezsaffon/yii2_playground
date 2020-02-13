@@ -8,6 +8,7 @@ use app\models\TrabajadordesemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\SqlDataProvider;
 
 /**
  * TrabajadordesemController implements the CRUD actions for Trabajadordesem model.
@@ -38,9 +39,12 @@ class TrabajadordesemController extends Controller
         $searchModel = new TrabajadordesemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $query='SELECT servicios.nombre as servicio_nombre,servicios.id as serv_id ,trabajador.nombre as trab_nombre,trabajador.apellido as trab_apellido,trabajador.id as trab_id FROM trabajadordesem,servicios,trabajador WHERE trabajadordesem.servicio=servicios.id and trabajadordesem.trabajador=trabajador.id';
+        $provider = new SqlDataProvider(['sql' => $query,]);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $provider,
         ]);
     }
 

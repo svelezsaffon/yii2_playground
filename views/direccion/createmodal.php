@@ -12,10 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="direccion-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_formmodal', [
         'model' => $model,
+        'direcciones'=>$direcciones
     ]) ?>
 
 </div>

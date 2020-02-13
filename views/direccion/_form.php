@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\JsExpression;
-
+use yii\helpers\ArrayHelper;
 
 
 /* @var $this yii\web\View */
@@ -11,23 +11,32 @@ use yii\web\JsExpression;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+
+
 <div class="direccion-form">
 
+
+
     <?php $form = ActiveForm::begin(); ?>
+
 
     <?= $form->field($model, 'direccion')->textarea(['rows' => 6])->hint(
         '<h5><font color="red">Digita la direccion completa, utiliza todos los detalles posibles</font></h5>'
         ) ?>
 
+    <?= $form->field($model, 'ciudad')->dropDownList(ArrayHelper::map($direcciones,'id', 'nombre'))->hint(
+              '<h5><font color="red">Estamos trabajando para añadir mas ciudades a nuestro servicio</font></h5>'
+              ); ?>        
+
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true])->hint(
       '<h5><font color="red">Dale un nombre que te ayude a reconocer esta direccion</font></h5>'
       ) ?>
 
-
-
-            <?= $form->field($model, 'quien_recibe')->textarea(['rows' => 6])->hint(
-              '<h5><font color="red">Que persona recibe en esta direccion, algo como "Mi tia Valentina"</font></h5>'
+    <?= $form->field($model, 'quien_recibe')->textarea(['rows' => 6])->hint(
+              '<h5><font color="red">Que persona recibe en esta direccion, o porquien debemoe preguntar cuando lleguemos... algo como "Mi tia Valentina"</font></h5>'
               ) ?>      
+
+
 
     <hr/>
     <h4> Puedes mostranos donde es tu direccion?</h4>
