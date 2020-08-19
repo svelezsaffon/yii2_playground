@@ -118,7 +118,11 @@ img.resize-90 {
     </div>
 
     <div class="item">
-      <img src="img/servicios/banner-domestico.png" alt="Los Angeles">
+      <img src="img/servicios/team-servicios-247.jpg" alt="Los Angeles">
+    </div>
+
+    <div class="item">
+      <img src="img/servicios/trabaja-con-nosotros-servicio-247.jpg" alt="Los Angeles">
     </div>
 
   </div>
@@ -139,7 +143,7 @@ img.resize-90 {
     <div class="row">
         <div class="col-lg-12 text-center">
             <h3 class="section-heading"> <p class="grey-text" style="color:grey;">Conoce aquí</p> </h3>
-            <h2 class="section-subheading"> <p class="grey-text" style="color:grey;">¡Nuestros servicios destacados!</p></h2>
+            <h2 class="section-subheading"> <p class="grey-text" style="color:grey;">¡Algunos de nuestros servicios!</p></h2>
         </div>
     </div>
     <div class="section-bg-grey border-top-medium">
@@ -170,7 +174,7 @@ img.resize-90 {
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <button type="button" class="center-block btn btn-info">Ver mas</button>
+                            <?= Html::a('Ver mas', ['/servicios/viewpintura'], ['class'=>'center-block btn btn-info']) ?>
                         </div>
                     </div>                
                 </div>
@@ -194,7 +198,7 @@ img.resize-90 {
                             <div class="grey-text section-subheading">
                                     
                                 <p class="border-top-xx-small small-text">servicio de</p>
-                                <p class="border-top-xx-small">Pintura</p>
+                                <p class="border-top-xx-small">Servicio Domestico</p>
                                 <p class="small-text">Unica vez o mensual</p>
                                     
                             </div>
@@ -202,7 +206,7 @@ img.resize-90 {
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <button type="button" class="center-block btn btn-info">Ver mas</button>
+                            <?= Html::a('Ver mas', ['/servicios/viewdome'], ['class'=>'center-block btn btn-info']) ?>
                         </div>
                     </div>                
                 </div>
@@ -226,7 +230,7 @@ img.resize-90 {
                             <div class="grey-text section-subheading">
                                     
                                 <p class="border-top-xx-small small-text">servicio de</p>
-                                <p class="border-top-xx-small">Pintura</p>
+                                <p class="border-top-xx-small">Lavado vehiculos</p>
                                 <p class="small-text">Unica vez o mensual</p>
                                     
                             </div>
@@ -234,7 +238,7 @@ img.resize-90 {
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <button type="button" class="center-block btn btn-info">Ver mas</button>
+                            <?= Html::a('Ver mas', ['/servicios/viewvehi'], ['class'=>'center-block btn btn-info']) ?>
                         </div>
                     </div>                
                 </div>
@@ -258,7 +262,7 @@ img.resize-90 {
                             <div class="grey-text section-subheading">
                                     
                                 <p class="border-top-xx-small small-text">servicio de</p>
-                                <p class="border-top-xx-small">Pintura</p>
+                                <p class="border-top-xx-small">Jardineria</p>
                                 <p class="small-text">Unica vez o mensual</p>
                                     
                             </div>
@@ -266,7 +270,7 @@ img.resize-90 {
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <button type="button" class="center-block btn btn-info">Ver mas</button>
+                            <?= Html::a('Ver mas', ['/servicios/viewjard'], ['class'=>'center-block btn btn-info']) ?>
                         </div>
                     </div>                
                 </div>
@@ -275,35 +279,41 @@ img.resize-90 {
 
         </div>
     </div>
-    </div>
-
-<div class="border-top-medium">
-    <div class="row">
-        <div class="col-lg-4 ">
-                    <div class="media">
-                        <div class="media-body">
-                            <img src="img/promos/oferta1.png" class="media-object">
-                        </div>
-                    </div>             
-        </div>
-        <div class="col-lg-4">
-                    <div class="media">
-                        <div class="media-body">
-                            <img src="img/promos/oferta2.png" class="media-object">
-                        </div>
-                    </div>             
-        </div>
-        <div class="col-lg-4">
-                    <div class="media">
-                        <div class="media-body">
-                            <img src="img/promos/oferta3.png" class="media-object">
-                        </div>
-                    </div>             
-        </div>                
-    </div>
 
 </div>
 
+<div class="border-top-medium">
+    <div class="well text-center">
+        <h5>Estos son solo algunos de los servicios que se prestan aquí! te invitamos a que creas tu cuenta y mires todos los que tenemos para ofrecer</h5>
+    </div>    
+</div>    
+<!--
+<div class="border-top-medium">
+    <div class="row">
+        <div class="col-lg-4 ">
+            <div class="media">
+                <div class="media-body">
+                    <img src="img/promos/oferta1.png" class="media-object">
+                </div>
+            </div>             
+        </div>
+        <div class="col-lg-4">
+            <div class="media">
+                <div class="media-body">
+                    <img src="img/promos/oferta2.png" class="media-object">
+                </div>
+            </div>             
+        </div>
+        <div class="col-lg-4">
+            <div class="media">
+                <div class="media-body">
+                    <img src="img/promos/oferta3.png" class="media-object">
+                </div>
+            </div>             
+        </div>                
+    </div>
+</div>
+-->
 <div class="border-top-medium">
 <div class="section-bg-grey">
     <div class="row">
@@ -415,7 +425,7 @@ img.resize-90 {
             </a>
             <a class="list-group-item">
                 <h5 class="list-group-item-heading">Configuración</h5>
-                <p class="list-group-item-text">La configuración del servicio es la parte mas importante, debes decirnos que día lo necesitas, en que dirección y puedes escoger de una gran lista de empleados quién realizara tu servicio</p>
+                <p class="list-group-item-text">La configuración del servicio es la parte mas importante, debes decirnos que día lo necesitas, en que dirección y puedes escoger de una gran lista de trabajadores quién realizara tu servicio</p>
             </a>
             <a class="list-group-item">
                 <h5 class="list-group-item-heading">Pago</h5>
@@ -424,11 +434,6 @@ img.resize-90 {
         </div>
     </div>
 </div>
-
-
-   
-
-
 
 
         <!-- jQuery -->

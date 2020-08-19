@@ -120,6 +120,8 @@ class DireccionController extends Controller
         return $model->direccion;
     }
 
+
+
     /**
      * Creates a new Direccion model.
      * If creation is successful, the browser will be redirected to the 'view' page.

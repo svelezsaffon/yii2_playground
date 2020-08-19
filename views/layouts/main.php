@@ -67,6 +67,7 @@ AppAsset::register($this);
 .top-buffer-60 { margin-top:100px; }
 .top-buffer-30 { margin-top:50px; }
 .top-buffer-15 { margin-top:30px; }
+.top-buffer-10 { margin-top:10px; }
 .top-buffer-null { margin-top:0px; }
 .yeti{color: #1e90ff;}
 .red-yeti{color: #FF3333;}
@@ -75,11 +76,13 @@ AppAsset::register($this);
 }
 
 .navbar {
-    background-color: #808080;
+    background-color: #FFFFFF;
     border-color: #808080;
-    margin-bottom: 0;
 }
-
+.navbar-toggle{
+    background-color: #1e90ff;
+    border-color: #808080;
+}
 
 .grey-text{
     color: #A9A9A9; 
@@ -102,6 +105,7 @@ section {
   
 </style>
 
+
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -109,12 +113,10 @@ section {
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Serviciso247', 
         //'brandLabel' => '<img src="img/logos/logoservicios.jpg" style="max-width:10%;" class="img-responsive"/>', 
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-            'style' => 'color: #ffffff; border-style: solid; border-color: #808080 #e5e500 #808080 #808080;',
+             'class' => 'navbar-inverse navbar-fixed-top',
         ],
 
     ]);
@@ -122,9 +124,9 @@ section {
     
     if(Yii::$app->user->isGuest ){
         $items=[
-            ['label' => 'Trabaja con nosotros','icon'=> 'road', 'url' => Url::to('index.php?r=aplicacion-trabajos/create')],
-            ['label' => 'Ingresar','icon'=> 'road', 'url' =>  Url::to('index.php?r=site/login')],
-            ['label' => 'Registrarse','icon'=> 'road', 'url' => Url::to('index.php?r=site/signup')]
+            ['label' => 'Trabaja con nosotros','icon'=> 'road', 'url' => Url::to('index.php?r=aplicacion-trabajos/create'),'linkOptions' => ['style' => 'color: #1e90ff']],
+            ['label' => 'Ingresar','icon'=> 'road', 'url' =>  Url::to('index.php?r=site/login'),'linkOptions' => ['style' => 'color: #1e90ff']],
+            ['label' => 'Registrarse','icon'=> 'road', 'url' => Url::to('index.php?r=site/signup'),'linkOptions' => ['style' => 'color: #1e90ff']]
             
         ];
     }else if(Yii::$app->user->can('admin')){
@@ -196,29 +198,22 @@ section {
         $size++;
     }
 
-    
 
         $items=[
  
-            ['label' => 'Mis direcciones','icon'=> 'road', 'url' => ['/direccion'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],
-            ['label' => 'Mis servicios por dia', 'url' => ['/servicioxdia'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],                        
-            ['label' => 'Mis Planes', 'url' => ['/plane'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],                        
-            ['label' => 'Mis pagos', 'url' => ['/pago'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],
-            
-            ['label' => 'Puntuaciones', 'url' => ['/ranking'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],
-
-            ['label' => 'Notificaciones '. Html::tag('span', $size, ['class' => 'badge']),
+            ['label' => 'Mis direcciones','icon'=> 'road', 'url' => ['/direccion'],'linkOptions' => ['style' => 'color: #19B9B0']],
+            ['label' => 'Mis servicios', 'url' => ['/servicioxdia'],'linkOptions' => ['style' => 'color: #19B9B0']],                         
+            ['label' => 'Mis pagos', 'url' => ['/pago'],'linkOptions' => ['style' => 'color: #19B9B0']],
+            ['label' => 'Puntuaciones', 'url' => ['/ranking'],'linkOptions' => ['style' => 'color: #19B9B0']],
+            ['label' => 'Notificaciones '. Html::tag('span', $size, ['class' => 'badge','linkOptions' => ['style' => 'color: #19B9B0']]),
                         'items' => $items_notis,
-
-                        'linkOptions' =>['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']
             ],
-
             (
                 '<li >'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
                     'Salir (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
+                    ['class' => 'btn btn-link logout','linkOptions' => ['style' => 'color: #19B9B0']]
                 )
                 . Html::endForm()
                 . '</li>'
@@ -242,11 +237,9 @@ section {
 
         $items=[            
                                     
-            ['label' => 'Servicios Prestados', 'url' => ['/costos'],'linkOptions' => ['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']],
-            ['label' => 'Notificaciones '. Html::tag('span', $size, ['class' => 'badge']),
+            ['label' => 'Servicios Prestados', 'url' => ['/costos'],'linkOptions' => ['style' => 'color: #19B9B0']],
+            ['label' => 'Notificaciones '. Html::tag('span', $size, ['class' => 'badge'] ),
                         'items' => $items_notis,
-
-                        'linkOptions' =>['style' => 'color: #ffffff; border-style: solid; border-color: #808080 #ffbf00 #808080 #808080;']
             ],            
             
             (
@@ -254,7 +247,7 @@ section {
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
                     'Salir (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
+                    ['class' => 'btn btn-link logout','linkOptions' => ['style' => 'color: #19B9B0']]
                 )
                 . Html::endForm()
                 . '</li>'
@@ -265,7 +258,7 @@ section {
 
 
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],        
+        'options' => ['class' => 'navbar-nav navbar-right' ],        
         
         'items' => $items,
         'encodeLabels' => false,
@@ -273,7 +266,7 @@ section {
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div class="container top-buffer">
         
         <?= Alert::widget() ?>
         <?= $content ?>

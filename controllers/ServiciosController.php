@@ -104,10 +104,25 @@ class ServiciosController extends Controller
             return $this->redirect(['/']);
 
         }
-
         
     }
 
+
+    public function actionViewjard(){
+        return $this->render('viewjard', []);
+    }
+
+    public function actionViewpintura(){
+        return $this->render('viewpintura', []);
+    }
+
+    public function actionViewdome(){
+        return $this->render('viewdome', []);
+    }
+
+    public function actionViewvehi(){
+        return $this->render('viewvehi', []);
+    }
 
 
     public function actionGetname($id){

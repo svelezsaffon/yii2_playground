@@ -85,7 +85,7 @@ class UserInfoController extends Controller
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            if(Yii::$app->user->can('seller')){
+            if(Yii::$app->user->can('create-service') || Yii::$app->user->can('seller')){
                 $trab=new Trabajador();
                 $trab->nombre=$model->nombre;
                 $trab->apellido=$model->apellidos;                

@@ -203,7 +203,7 @@ class ServicioxdiaController extends Controller
 
             $direccion=Direccion::find()->where(['id'=>$model->direccion])->one();
 
-            $costo=Costos::find()->where(['servicio' => $model->servicio,'horario'=>$model->tiempo, 'ciudad'=>$direccion->ciudad])->one();
+            $costo=Costos::find()->where(['servicio' => $model->servicio,'horario'=>$model->tiempo, 'ciudad'=>$direccion->ciudad,'trabajador'=>$asing->trabajador])->one();
 
             $pago = new Pago();
             $pago->servicioxdia=$model->id;
@@ -296,12 +296,18 @@ class ServicioxdiaController extends Controller
 
         $searchModel = new Horarioxservicio();
 
-        $horarios=$searchModel->getByTrabajo($serv);
+        $horarioz = (new \yii\db\Query())
+                ->select(['horarios.id as id', 'horarios.descripcion as descri'])
+                ->from(['costos'])
+                ->join('LEFT JOIN', 'horarios', 'costos.horario = horarios.id')
+                ->andWhere('costos.servicio = :serv',[':serv' => $serv])
+                ->distinct()
+                ->all();
 
-        $horarioss=[];
-        foreach ($horarios as $horario) {
+        foreach ($horarioz as $horario) {
+            
             $horarioss[$horario['id']]=$horario['descri'];
-        } 
+        }  
 
 
         $query="SELECT servicio, min(valor) as value FROM costos group by servicio";

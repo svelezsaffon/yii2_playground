@@ -51,7 +51,7 @@ if($upuser==false && $cuentaver==true){
     </h2>  
     <p class="grey-text">
       <strong> ¡Nos encantaria que empieces a utilizar nuestra plataforma para ofrecer tus servicios! </strong>
-        <p><?= Html::a('Configurar nuevo servicio a ofrecer', ['costos/create'], ['class' => 'btn btn-primary','style'=>'width:40%;']) ?></p>
+        <p><?= Html::a('Configurar nuevo servicio', ['costos/create'], ['class' => 'btn btn-primary','style'=>'width:40%;']) ?></p>
     </p>
   </div>
 </div>
